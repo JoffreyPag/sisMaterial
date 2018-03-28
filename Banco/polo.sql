@@ -1,5 +1,5 @@
 CREATE TABLE etec_polo (
-  idpolo INT NOT NULL AUTO_INCREMENT,
+  id_polo INT NOT NULL AUTO_INCREMENT,
   municipio VARCHAR(45) NOT NULL,
   cidade VARCHAR(45) NOT NULL,
   bairro VARCHAR(45) NOT NULL,
@@ -9,10 +9,10 @@ CREATE TABLE etec_polo (
   telefone VARCHAR(11) NULL,
   shortname VARCHAR(4) NOT NULL,
   ativo TINYINT NOT NULL,
-  PRIMARY KEY (idpolo)
+  PRIMARY KEY (id_polo)
  );
 
- INSERT INTO etec_polo (idpolo, municipio, cidade, bairro, logradouro, numero, cep, telefone, shortname, ativo) VALUES
+ INSERT INTO etec_polo (id_polo, municipio, cidade, bairro, logradouro, numero, cep, telefone, shortname, ativo) VALUES
 (1, 'Macaíba', 'Macaíba', '', '1', '', '', '', 'MACA', 1),
 (2, 'Natal', 'Natal', '', '2', '', '', '', 'NATL', 1),
 (3, 'São Paulo do Potengi', 'São Paulo do Potengi', '', '3', '', '', '', 'SAPP', 1),
