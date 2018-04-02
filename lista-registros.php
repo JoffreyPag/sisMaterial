@@ -14,6 +14,8 @@
         INNER JOIN etec_departamento d ON d.id_departamento = t.id_departamento 
         INNER JOIN etec_polo p ON d.id_polo = p.id_polo";
     }
+    $sqlpolo = "SELECT id_polo, municipio, cidade FROM etec_polo";
+    
 ?>
 
 <!DOCTYPE html>
@@ -35,6 +37,18 @@
                 <option value="numero_serie">Numero de serie</option>      
             </select>
             <input type="text" name="filtro"/>
+            <input type="submit" value="Pesquisar">
+        </form>
+        <form action="lista_material_polo.php" method="POST">
+        <label>Pesquisar por polo:</label>
+            <select name="polo" id="">
+                <?php 
+                    $resultadopolo = $conn->query($sqlpolo);
+                    while($row = mysqli_fetch_array($resultadopolo)){
+                        echo '<option value="'.$row['id_polo'].'">'.$row['municipio'].' - '.$row['cidade'].'</option>';
+                    }
+                ?>
+            </select>
             <input type="submit" value="Pesquisar">
         </form>
     </div>
@@ -64,7 +78,7 @@
                     </form>
                 </td>
                 <td>
-                    <form action="controle/processo_material.php" method="POST">
+                    <form action="controle/processo_tombo.php" method="POST">
                         <button type="submit" value="'.$row['numero_tombo'].'" name="Excluir">Excluir</button>
                     </form>
                 </td>

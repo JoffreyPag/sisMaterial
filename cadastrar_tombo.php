@@ -28,7 +28,7 @@
     <div id="cabecalho">
     </div >
     <div id="tabela-registro">
-        <form action="controle/processo_material.php" method="POST">
+        <form action="controle/processo_tombo.php" method="POST">
             <table>
                 <tr>
                     <th>
@@ -57,29 +57,29 @@
                                 $sql1 = "SELECT id_material, especificacao FROM etec_materiais";
                                 $result1 = $conn->query($sql1);
                                 while($row1 = mysqli_fetch_array($result1)){
-                                    echo '<option value"'.$row1['id_material'].'">'.$row1['especificacao'].'</option>';
+                                    echo '<option value="'.$row1['id_material'].'">'.$row1['especificacao'].'</option>';
                                 }
                             ?>
                         </select>
                     </td>
                 </tr>
-                <!--<tr>
+                <tr>
                     <th>
                         <label for="localizacao">Localização Atual:</label>
                     </th>
                     <td>
                         <select name="local">
                             <?php
-                                $sql = "SELECT id_polo, cidade FROM etec_polo";
+                                $sql = "SELECT d.id_departamento, d.nome, p.cidade FROM etec_departamento d INNER JOIN etec_polo p ON d.id_polo = p.id_polo";
                                 $result = $conn->query($sql);
                                 while($row = mysqli_fetch_array($result)){
-                                    echo ' <option value="'.$row['idpolo'].'">'.$row['cidade'].'</option>';
+                                    echo ' <option value="'.$row['id_departamento'].'">'.$row['cidade'].' - '.$row['nome'].'</option>';
                                 }
                             ?>
                         </select>
                     </td>
                 </tr>
-                <tr>-->
+                <tr>
                     <td colspan="2">
                         <input type="submit" value="Cadastrar" name="Cadastrar">
                     </td>

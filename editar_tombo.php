@@ -53,7 +53,7 @@
                     </select>
                 </td>
             </tr>
-            <tr>
+            <!--<tr>
                 <th>
                     <label for="localizacao">Localização Atual:</label>
                 </th>
@@ -69,10 +69,10 @@
                         ?>
                     </select>
                 </td>
-            </tr>
+            </tr>-->
             <tr>
                 <td colspan="2">
-                    <button type="submit" value="<?=$row['id_tombo'] ?>" name="Atualizar">Atualizar</button>
+                    <button type="submit" value="<?=$row['numero_tombo'] ?>" name="Atualizar">Atualizar</button>
                 </td>
             </tr>
         </table>
