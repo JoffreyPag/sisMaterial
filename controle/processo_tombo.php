@@ -21,7 +21,7 @@ if(isset($_POST['Excluir'])){
 
     if($result){
         //echo 'sucesso';
-        header("Location: ../lista-registros.php");
+        header("Location: ../index.php");
     }else{
         echo 'falha';
     }
