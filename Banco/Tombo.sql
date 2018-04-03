@@ -16,3 +16,7 @@ INSERT INTO etec_tombo VALUES
 ("2015007525", "BRJ451GTH6", 1, 1),
 ("2015007527", "BRJ446BZNP", 1, 1),
 ("2015007541", "BRJ451GTGT", 1, 1);
+
+/*
+UPDATE etec_tombo SET id_departamento=null WHERE numero_tombo = '2015007499'
+*/

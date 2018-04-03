@@ -1,10 +1,10 @@
 CREATE TABLE etec_departamento(
 	id_departamento int NOT NULL AUTO_INCREMENT,
 	nome TEXT NOT NULL,	
-    id_polo int,
+    idpolo int,
 	isestoque BOOLEAN,
 	PRIMARY KEY(id_departamento),
-	FOREIGN KEY(id_polo) REFERENCES etec_polo(id_polo)
+	FOREIGN KEY(idpolo) REFERENCES etec_polo(idpolo)
 );
 
 INSERT INTO etec_departamento VALUES

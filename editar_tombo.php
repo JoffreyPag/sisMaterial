@@ -2,10 +2,10 @@
     include_once("conexao.php");
     $idTombo = $_POST["editar"];
     //echo $idMaterial
-    $sql = "SELECT t.numero_tombo, t.numero_serie, t.id_material, m.especificacao, d.id_departamento, d.nome, p.id_polo, p.cidade FROM etec_tombo t 
+    $sql = "SELECT t.numero_tombo, t.numero_serie, t.id_material, m.especificacao, d.id_departamento, d.nome, p.idpolo, p.cidade FROM etec_tombo t 
     INNER JOIN etec_materiais m ON t.id_material = m.id_material
     INNER JOIN etec_departamento d ON t.id_departamento = d.id_departamento
-    INNER JOIN etec_polo p ON d.id_polo = p.id_polo
+    INNER JOIN etec_polo p ON d.idpolo = p.idpolo
     WHERE t.numero_tombo = $idTombo";
 
     $result = $conn->query($sql);
@@ -59,12 +59,12 @@
                 </th>
                 <td>
                     <select name="local">
-                        <option value="<?=$row['id_polo'] ?>"><?=$row['cidade'] ?></option>
+                        <option value="<?=$row['idpolo'] ?>"><?=$row['cidade'] ?></option>
                         <?php
-                            $sql2 = "SELECT id_polo, cidade FROM etec_polo";
+                            $sql2 = "SELECT idpolo, cidade FROM etec_polo";
                             $result2 = $conn->query($sql2);
                             while($row2 = mysqli_fetch_array($result2)){
-                                echo ' <option value="'.$row2['id_polo'].'">'.$row2['cidade'].'</option>';
+                                echo ' <option value="'.$row2['idpolo'].'">'.$row2['cidade'].'</option>';
                             }
                         ?>
                     </select>
