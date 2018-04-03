@@ -22,14 +22,14 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Materiais</title>
+    <title>Tombos registrados</title>
     <link rel="stylesheet" type="text/css" href="CSS/estilos.css"/>
 </head>
 <body>
 
     <div>
         <a href="cadastrar_tombo.php"><input type="button" value="Cadastrar Tombo"></a>
-        <a href="cadastrar_material.php"><input type="button" value="Adicionar Material"></a>  
+        <a href="listar_material.php"><input type="button" value="Material"></a>  
         
         <form action="index.php" method="POST">
             <select name="tipo" id="">
