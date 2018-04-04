@@ -4,15 +4,15 @@
         $campo = $_POST['tipo'];
         $valor = $_POST['filtro'];
         $sql = "SELECT t.numero_tombo, t.numero_serie, m.especificacao, m.acessorio, d.nome, d.isestoque, p.cidade FROM etec_tombo t 
-        INNER JOIN etec_materiais m ON t.id_material = m.id_material 
-        INNER JOIN etec_departamento d ON d.id_departamento = t.id_departamento 
-        INNER JOIN etec_polo p ON d.idpolo = p.idpolo WHERE t.$campo = '$valor'";
+        LEFT OUTER JOIN etec_materiais m ON t.id_material = m.id_material 
+        LEFT OUTER JOIN etec_departamento d ON d.id_departamento = t.id_departamento 
+        LEFT OUTER JOIN etec_polo p ON d.idpolo = p.idpolo WHERE t.$campo = '$valor'";
 
     }else{
         $sql = "SELECT t.numero_tombo, t.numero_serie, m.especificacao, m.acessorio, d.nome, d.isestoque, p.cidade FROM etec_tombo t 
-        INNER JOIN etec_materiais m ON t.id_material = m.id_material 
-        INNER JOIN etec_departamento d ON d.id_departamento = t.id_departamento 
-        INNER JOIN etec_polo p ON d.idpolo = p.idpolo";
+        LEFT OUTER JOIN etec_materiais m ON t.id_material = m.id_material 
+        LEFT OUTER JOIN etec_departamento d ON d.id_departamento = t.id_departamento 
+        LEFT OUTER JOIN etec_polo p ON d.idpolo = p.idpolo";
     }
     $sqlpolo = "SELECT idpolo, municipio, cidade FROM etec_polo";
     
@@ -29,7 +29,8 @@
 
     <div>
         <a href="cadastrar_tombo.php"><input type="button" value="Cadastrar Tombo"></a>
-        <a href="listar_material.php"><input type="button" value="Material"></a>  
+        <a href="listar_material.php"><input type="button" value="Material"></a>
+        <a href="guias_transito.php"><input type="button" value="Guias de transito"></a>    
         
         <form action="index.php" method="POST">
             <select name="tipo" id="">
