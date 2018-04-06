@@ -7,13 +7,14 @@ if(isset($_POST['Excluir'])){
 }else{
     $espec = $_POST["Especificacao"];
     $acess = $_POST["Acessorios"];
-
+    $qtd = $_POST['quantidade'];
     if(isset($_POST['Cadastrar'])){
-        $sql = "INSERT INTO etec_materiais(especificacao, acessorio) VALUES('$espec','$acess')";
+        $econsumo = ($_POST['tipoMaterial'] == "consumo")? true : false;
+        $sql = "INSERT INTO etec_materiais(especificacao, acessorio, isconsumo, quantidade) VALUES('$espec','$acess', '$econsumo', '$qtd')";
     }elseif(isset($_POST['Atualizar'])){
         $id = $_POST['Atualizar'];
         $sql = "UPDATE etec_materiais 
-                SET especificacao = '$espec', acessorio = '$acess' WHERE id_material = '$id'";
+                SET especificacao = '$espec', acessorio = '$acess', quantidade = '$qtd' WHERE id_material = '$id'";
     }
 }
 

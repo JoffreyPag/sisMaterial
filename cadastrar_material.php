@@ -9,15 +9,23 @@
         <table>
             <tr>
                 <th><label for="Especificacao">Especificação:</label></th>
-                <td><input type="text" name="Especificacao" required></td>
+                <td><input type="text" name="Especificacao" id="Especificacao" required></td>
             </tr>
             <tr>
                 <th><label for="Acessorios">Acessorios:</label></th>
-                <td><input type="text" name="Acessorios" required></td>
+                <td><input type="text" name="Acessorios" id="Acessorios" value=" - "></td>
             </tr>
             <tr>
-                <td colspan="2">
-                    <input type="submit" value="Cadastrar" name="Cadastrar">
+                <th><label for="Quantdade">Quantidade:</label></th>
+                <td><input type="number" name="quantidade" id="Quantdade" value="0" min="0"></td>
+            </tr>
+            <tr>
+                <td><input type="radio" name="tipoMaterial" value="consumo"> Consumo </input></td>
+                <td><input type="radio" name="tipoMaterial" value="permanente" checked>Permanente</input></td>
+            </tr>
+            <tr>
+                <td colspan = "2">
+                    <input type="submit" value="Cadastrar" name="Cadastrar">    
                 </td>
             </tr>
         </table>

@@ -21,9 +21,9 @@ $result = $conn->query($sql);
 <body>
     <h1>Guias</h1>
     <a href="index.php">Voltar</a>
-    <a href="guias_transito.php"><input type="button" value="Gerar novo guia"></a> 
+    <a href="novoGuiaet1.php"><input type="button" value="Gerar novo guia"></a> 
     <form action="guias_transito.php" method="POST">
-            <select name="filtro" id="">
+            <select name="filtro">
                 <option value="ENTREGUE">ENTREGUE</option>
                 <option value="ESPERANDO">ESPERANDO</option>      
             </select>
