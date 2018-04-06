@@ -9,11 +9,11 @@
         <table>
             <tr>
                 <th><label for="Especificacao">Especificação:</label></th>
-                <td><input type="text" name="Especificacao" id="Especificacao" required></td>
+                <td><input type="text" name="Especificacao" required></td>
             </tr>
             <tr>
                 <th><label for="Acessorios">Acessorios:</label></th>
-                <td><input type="text" name="Acessorios" id="Acessorios" required></td>
+                <td><input type="text" name="Acessorios" required></td>
             </tr>
             <tr>
                 <td colspan="2">

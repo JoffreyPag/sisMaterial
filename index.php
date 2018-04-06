@@ -1,92 +1,42 @@
 <?php
-    include_once("conexao.php");
-    if(isset($_POST['tipo']) && isset($_POST['filtro'])){
-        $campo = $_POST['tipo'];
-        $valor = $_POST['filtro'];
-        $sql = "SELECT t.numero_tombo, t.numero_serie, m.especificacao, m.acessorio, d.nome, d.isestoque, p.cidade FROM etec_tombo t 
-        LEFT OUTER JOIN etec_materiais m ON t.id_material = m.id_material 
-        LEFT OUTER JOIN etec_departamento d ON d.id_departamento = t.id_departamento 
-        LEFT OUTER JOIN etec_polo p ON d.idpolo = p.idpolo WHERE t.$campo = '$valor'";
-
-    }else{
-        $sql = "SELECT t.numero_tombo, t.numero_serie, m.especificacao, m.acessorio, d.nome, d.isestoque, p.cidade FROM etec_tombo t 
-        LEFT OUTER JOIN etec_materiais m ON t.id_material = m.id_material 
-        LEFT OUTER JOIN etec_departamento d ON d.id_departamento = t.id_departamento 
-        LEFT OUTER JOIN etec_polo p ON d.idpolo = p.idpolo";
-    }
-    $sqlpolo = "SELECT idpolo, municipio, cidade FROM etec_polo";
-    
+ include_once("conexao.php");
+ $sql = "SELECT id_material, especificacao, acessorio FROM etec_materiais";
+ $result = $conn->query($sql);
 ?>
-
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Tombos registrados</title>
-    <link rel="stylesheet" type="text/css" href="CSS/estilos.css"/>
+    <title>Materiais</title>
 </head>
 <body>
-
-    <div>
-        <a href="cadastrar_tombo.php"><input type="button" value="Cadastrar Tombo"></a>
-        <a href="listar_material.php"><input type="button" value="Material"></a>
-        <a href="guias_transito.php"><input type="button" value="Guias de transito"></a>    
-        
-        <form action="index.php" method="POST">
-            <select name="tipo" id="">
-                <option value="numero_tombo">Numero do Tombo</option>
-                <option value="numero_serie">Numero de serie</option>      
-            </select>
-            <input type="text" name="filtro"/>
-            <input type="submit" value="Pesquisar">
-        </form>
-        <form action="lista_material_polo.php" method="POST">
-        <label>Pesquisar por polo:</label>
-            <select name="polo" id="">
-                <?php 
-                    $resultadopolo = $conn->query($sqlpolo);
-                    while($row = mysqli_fetch_array($resultadopolo)){
-                        echo '<option value="'.$row['idpolo'].'">'.$row['municipio'].' - '.$row['cidade'].'</option>';
-                    }
-                ?>
-            </select>
-            <input type="submit" value="Pesquisar">
-        </form>
-    </div>
-    <div class="tabela">
-    <table border="1">
+    <a href="cadastrar_tombo.php"><input type="button" value="Cadastrar Tombo"></a>
+    <a href="guias_transito.php"><input type="button" value="Guias de transito"></a>
+    <a href="tombos.php"><input type="button" value="Tombos"></a>
+    <a href="cadastrar_material.php"><input type="button" value="Cadastrar material"></a>
+    <table border=1>
         <tr>
-            <th>Numero de tombo</th>
-            <th>Numero de serie</th>
             <th>Especificação</th>
             <th>Acessórios</th>
-            <th>Localização Atual</th>
-            <Th>Setor</th>
         </tr>
         <?php 
-            $result = $conn->query($sql);
-            while($row = mysqli_fetch_array($result)){
-                echo'<tr>
-                <td>'.$row['numero_tombo'].'</td>
-                <td>'.$row['numero_serie'].'</td>
-                <td>'.$row['especificacao'].'</td>
-                <td>'.$row['acessorio'].'</td>
-                <td>'.$row['cidade'].'</td>
-                <td>'.$row['nome'].'</td>
-                <td>
-                    <form action="editar_tombo.php" method="POST">
-                        <button type="submit" value="'.$row['numero_tombo'].'" name="editar">Editar</button>
+        while($row = mysqli_fetch_array($result)){
+            echo'<tr>
+            <td>'.$row['especificacao'].'</td>
+            <td>'.$row['acessorio'].'</td>
+            <td>
+                    <form action="editar_material.php" method="POST">
+                        <button type="submit" value="'.$row['id_material'].'" name="editar">Editar</button>
                     </form>
                 </td>
                 <td>
-                    <form action="controle/processo_tombo.php" method="POST">
-                        <button type="submit" value="'.$row['numero_tombo'].'" name="Excluir">Excluir</button>
+                    <form action="controle/processo_material.php" method="POST">
+                        <button type="submit" value="'.$row['id_material'].'" name="Excluir">Excluir</button>
                     </form>
                 </td>
-                </tr>';
-            }
+            </tr>';
+        }
         ?>
     </table>
-    </div>
 </body>
 </html>

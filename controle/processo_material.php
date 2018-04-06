@@ -1,20 +1,27 @@
 <?php
 include_once("../conexao.php");
+if(isset($_POST['Excluir'])){
+    $id = $_POST['Excluir'];
+    $sql = "DELETE FROM etec_materiais WHERE id_material = '$id'";
 
-$espec = $_POST["Especificacao"];
-$acess = $_POST["Acessorios"];
+}else{
+    $espec = $_POST["Especificacao"];
+    $acess = $_POST["Acessorios"];
 
-if(isset($_POST['Cadastrar'])){
-    $sql = "INSERT INTO etec_materiais(especificacao, acessorio) VALUES('$epsec','$acess')";
-}elseif(isset($_POST['Atualizar'])){
-    //$sql = "UPDATE etec_materiais SET id_tombo = '$nTombo',numero_serie = '$nSerie', especificacao = '$especificacao', acessorio = '$acessorios', id_polo = '$localAtual' WHERE id_tombo = '$idTomboAntigo' ";
+    if(isset($_POST['Cadastrar'])){
+        $sql = "INSERT INTO etec_materiais(especificacao, acessorio) VALUES('$espec','$acess')";
+    }elseif(isset($_POST['Atualizar'])){
+        $id = $_POST['Atualizar'];
+        $sql = "UPDATE etec_materiais 
+                SET especificacao = '$espec', acessorio = '$acess' WHERE id_material = '$id'";
+    }
 }
 
 $result = $conn->query($sql);
 
     if($result){
         //echo 'sucesso';
-        header("Location: ../lista-registros.php");
+        header("Location: ../index.php");
     }else{
         echo 'falha';
     }
