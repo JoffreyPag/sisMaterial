@@ -11,7 +11,6 @@ $result = $conn->query($sql);
 </head>
 <body>
     <h4>Selecione o material</h4>
-    <form action="novoGuiaet2.php" method="POST">
         <table>
             <tr>
                 <th>Especificação</th>
@@ -23,13 +22,26 @@ $result = $conn->query($sql);
                     echo '<tr>
                             <td>'.$row['especificacao'].'</td>
                             <td>'.$row['acessorio'].'</td>
-                            <td>
-                                    <button type="submit" value="'.$row['id_material'].'" name="escolhido">Solicitar</button>
+                            <td>'.$row['isConsumo'].'</td>
+                            <td>';
+
+                    if($row['isConsumo']==0){
+                        echo '<form action="novoGuiaet2.php" method="POST">
+                            <button type="submit" value="'.$row['id_material'].'" name="escolhido">Solicitar</button>
+                            </form>
                             </td>
-                        </tr>';
+                            </tr>';
+                    }else{
+                        echo '<form action="novoGuiaet3.php" method="POST">
+                            <button type="submit" value="'.$row['id_material'].'" name="escolhido">Solicitar</button>
+                            </form>
+                            </td>
+                            </tr>';
+                    }
                 }
             ?>
         </table>
-    </form>
+        <?php echo '<a href="guias_transito.php">Cancelar</a>'?>
+        
 </body>
 </html>
