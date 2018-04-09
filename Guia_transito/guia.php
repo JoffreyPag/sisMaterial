@@ -53,7 +53,10 @@ $result = $conn->query($sql);
         }
     ?>
 </table>
-
+<form action="../controle/processo_guia.php" method="POST">
+<input type="hidden" name="idguia" value="<?=$guiaID?>">
+<input type="submit" name="Excluir" value="Excluir">
+</form>
 
 </body>
 </html>

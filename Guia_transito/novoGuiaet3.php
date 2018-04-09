@@ -96,7 +96,7 @@ if(isset($_POST['numeroTombo'])){
                 ?>
             </tr>
         </table>
-        <input type="submit" value="Concluir">
+        <input type="submit" name="Cadastrar" value="Concluir">
     </form>
     <?php echo '<a href="novoGuiaet1.php">Cancelar</a>'?>
 </body>
