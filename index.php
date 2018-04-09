@@ -11,7 +11,7 @@
 </head>
 <body>
     <a href="cadastrar_tombo.php"><input type="button" value="Cadastrar Tombo"></a>
-    <a href="guias_transito.php"><input type="button" value="Guias de transito"></a>
+    <a href="Guia_transito/guias_transito.php"><input type="button" value="Guias de transito"></a>
     <a href="tombos.php"><input type="button" value="Tombos"></a>
     <a href="cadastrar_material.php"><input type="button" value="Cadastrar material"></a>
     <table border=1>
