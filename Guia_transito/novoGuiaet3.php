@@ -24,7 +24,7 @@ if(isset($_POST['numeroTombo'])){
 </head>
 <body>
 
-    <form action="teste.php" method="GET">
+    <form action="../controle/processo_guia.php" method="POST">
         <?php 
             if(isset($_POST['numeroTombo'])){
                 echo '<input type="hidden" name="nTombo" value='.$ntombo.'>';

@@ -116,7 +116,9 @@ INSERT INTO etec_materiais (id_material, especificacao, acessorio, isConsumo) VA
 (4, 'Estabilizador SOL 2000', 'Cabo de força.', 0),
 (5, 'Mesa para computador', '-', 0),
 (6, 'Monitor de LED HP backlit, 20 poledagas, HPV 206HZ', 'Cabo de força.', 0),
-(7, 'Nobreak black, Ragtech, 600 VA', 'Cabo de força.', 0);
+(7, 'Nobreak black, Ragtech, 600 VA', 'Cabo de força.', 0),
+(8, 'Resma de papel oficiao A4', '-', 1),
+(9, 'Garrafão de Água mineral' '-', 1);
 
 INSERT INTO etec_tombo VALUES
 ("2015007494", "BRJ446BZMS", 1, 1),
@@ -127,5 +129,7 @@ INSERT INTO etec_tombo VALUES
 ("2015007527", "BRJ446BZNP", 1, 1),
 ("2015007541", "BRJ451GTGT", 1, 1);
 
-INSERT INTO etec_guias (id_guia, id_origem, id_destino, id_material,responsavel, justificativa, numero_tombo, quantidade, entregador, destinatario, dia, mes, ano, stats) VALUES
-(1, 7, 5, 2,"MAX", "Precisa muito", null, 1, "Juvanderson", "Arthur", day(CURRENT_DATE), month(CURRENT_DATE), year(CURRENT_DATE), "ENTREGUE");
+INSERT INTO etec_guias (id_guia, id_origem, id_destino, id_material,responsavel, justificativa, quantidade, entregador, destinatario, dia, mes, ano, stats) VALUES
+(1, 7, 5, 2,"MAX", "Precisa muito", 1, "Juvanderson", "Arthur", day(CURRENT_DATE), month(CURRENT_DATE), year(CURRENT_DATE), "ENTREGUE"),
+(2, 7, 1, 8, "JOFFREY", "Porque precisa muito mesmo", 10, "", "", day(CURRENT_DATE), month(CURRENT_DATE), year(CURRENT_DATE), "ESPERANDO");
+

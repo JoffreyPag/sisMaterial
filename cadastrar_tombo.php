@@ -54,7 +54,7 @@
                     <td>
                         <select name="material"> 
                             <?php 
-                                $sql1 = "SELECT id_material, especificacao FROM etec_materiais";
+                                $sql1 = "SELECT id_material, especificacao FROM etec_materiais WHERE isConsumo = 0";
                                 $result1 = $conn->query($sql1);
                                 while($row1 = mysqli_fetch_array($result1)){
                                     echo '<option value="'.$row1['id_material'].'">'.$row1['especificacao'].'</option>';
