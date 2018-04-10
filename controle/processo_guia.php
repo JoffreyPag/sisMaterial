@@ -26,6 +26,11 @@ if(isset($_POST['Cadastrar'])){
 }elseif(isset($_POST['Excluir'])){
     $id = $_POST['idguia'];
     $sql = "DELETE FROM etec_guias WHERE id_guia = '$id'";
+}elseif(isset($_POST['Atualizar'])){
+    $id = $_POST['Atualizar'];
+    $estd = $_POST['estado'];
+    $sql = "UPDATE etec_guias 
+            SET stats = '$estd' WHERE id_guia = '$id'";
 }
 
 $result = $conn->query($sql);
