@@ -27,7 +27,7 @@ $result = $conn->query($sql);
                 <th>Material</th>
                 <th>Quantidade</th>
             </tr>
-                
+ 
             <?php
                 echo '<tr>
                         <td>

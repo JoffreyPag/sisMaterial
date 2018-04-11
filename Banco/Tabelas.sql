@@ -1,3 +1,5 @@
+CREATE DATABASE etec_adm();
+
 /*TABELA POLO*/
 CREATE TABLE etec_polo (
   idpolo INT NOT NULL AUTO_INCREMENT,
