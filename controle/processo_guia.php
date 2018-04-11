@@ -31,13 +31,26 @@ if(isset($_POST['Cadastrar'])){
     $estd = $_POST['estado'];
     $sql = "UPDATE etec_guias 
             SET stats = '$estd' WHERE id_guia = '$id'";
+}elseif(isset($_POST['Movimentar'])){
+    $dpOr = $_POST['idvelha'];
+    $dpDs = $_POST['setorDestino'];
+    $resp = $_POST['resp'];
+    $just = $_POST['just'];
+    $ntombo = $_POST['ntombo'];
+    $idMaterial = $_POST['idMaterial'];
+    $sql = "INSERT INTO etec_guias(id_origem,  id_destino, id_material, responsavel, justificativa, numero_tombo, dia, mes, ano, stats) 
+    VALUES('$dpOr', '$dpDs', '$idMaterial' ,'$resp', '$just', '$ntombo', day(CURRENT_DATE), month(CURRENT_DATE), year(CURRENT_DATE), 'ESPERANDO')";
 }
 
 $result = $conn->query($sql);
 echo $sql;
 
 if($result){
-    header("Location: ../Guia_transito/guias_transito.php");
+    if(isset($_POST['Movimentar'])){
+        header("Location: ../tombos.php");
+    }else{
+        header("Location: ../Guia_transito/guias_transito.php");
+    }
 }else{
     echo 'error';
 }

@@ -1,4 +1,4 @@
-CREATE DATABASE etec_adm();
+CREATE DATABASE etec_adm;
 
 /*TABELA POLO*/
 CREATE TABLE etec_polo (
@@ -130,8 +130,4 @@ INSERT INTO etec_tombo VALUES
 ("2015007525", "BRJ451GTH6", 1, 1),
 ("2015007527", "BRJ446BZNP", 1, 1),
 ("2015007541", "BRJ451GTGT", 1, 1);
-
-INSERT INTO etec_guias (id_guia, id_origem, id_destino, id_material,responsavel, justificativa, quantidade, entregador, destinatario, dia, mes, ano, stats) VALUES
-(1, 7, 5, 2,"MAX", "Precisa muito", 1, "Juvanderson", "Arthur", day(CURRENT_DATE), month(CURRENT_DATE), year(CURRENT_DATE), "ENTREGUE"),
-(2, 7, 1, 8, "JOFFREY", "Porque precisa muito mesmo", 10, "", "", day(CURRENT_DATE), month(CURRENT_DATE), year(CURRENT_DATE), "ESPERANDO");
 
