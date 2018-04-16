@@ -4,13 +4,13 @@
         $campo = $_POST['tipo'];
         $valor = $_POST['filtro'];
         $sql = "SELECT t.numero_tombo, t.numero_serie, m.especificacao, m.acessorio, d.nome, d.isestoque, p.cidade FROM etec_tombo t 
-        LEFT OUTER JOIN etec_materiais m ON t.id_material = m.id_material 
+        LEFT OUTER JOIN etec_materiais_permanentes m ON t.id_material = m.id_permanente 
         LEFT OUTER JOIN etec_departamento d ON d.id_departamento = t.id_departamento 
         LEFT OUTER JOIN etec_polo p ON d.idpolo = p.idpolo WHERE t.$campo = '$valor'";
 
     }else{
         $sql = "SELECT t.numero_tombo, t.numero_serie, m.especificacao, m.acessorio, d.nome, d.isestoque, p.cidade FROM etec_tombo t 
-        LEFT OUTER JOIN etec_materiais m ON t.id_material = m.id_material 
+        LEFT OUTER JOIN etec_materiais_permanentes m ON t.id_material = m.id_permanente 
         LEFT OUTER JOIN etec_departamento d ON d.id_departamento = t.id_departamento 
         LEFT OUTER JOIN etec_polo p ON d.idpolo = p.idpolo";
     }
@@ -31,7 +31,7 @@
         <a href="index.php">voltar</a>
         <a href="cadastrar_tombo.php"><input type="button" value="Cadastrar Tombo"></a>
         
-        <form action="index.php" method="POST">
+        <form action="tombos.php" method="POST">
             <select name="tipo" id="">
                 <option value="numero_tombo">Numero do Tombo</option>
                 <option value="numero_serie">Numero de serie</option>      

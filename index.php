@@ -1,10 +1,14 @@
 <?php
  include_once("conexao.php");
- $sql = "SELECT id_material, especificacao, acessorio FROM etec_materiais";
- $result = $conn->query($sql);
+ include_once("Modelo/Permanente.php");
+ $sqlPermanente = "SELECT id_permanente, especificacao, acessorio FROM etec_materiais_permanentes";
+ $sqlConsumo = "SELECT m.id_consumo, m.quantidade, m.especificacao , d.nome FROM etec_materiais_consumo m
+                INNER JOIN etec_departamento d WHERE m.id_departamento = d.id_departamento";
+ $resultPermanente = $conn->query($sqlPermanente);
+ $resultadoConsumo = $conn->query($sqlConsumo);
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <title>Materiais</title>
@@ -14,24 +18,57 @@
     <a href="Guia_transito/guias_transito.php"><input type="button" value="Guias de transito"></a>
     <a href="tombos.php"><input type="button" value="Tombos"></a>
     <a href="cadastrar_material.php"><input type="button" value="Cadastrar material"></a>
+    <h3>Materiais Permanentes cadastrados</h3>
     <table border=1>
         <tr>
             <th>Especificação</th>
             <th>Acessórios</th>
         </tr>
         <?php 
-        while($row = mysqli_fetch_array($result)){
+        while($row = mysqli_fetch_array($resultPermanente)){
             echo'<tr>
             <td>'.$row['especificacao'].'</td>
             <td>'.$row['acessorio'].'</td>
             <td>
                     <form action="editar_material.php" method="POST">
-                        <button type="submit" value="'.$row['id_material'].'" name="editar">Editar</button>
+                        <input type="hidden" name="tipoMaterial" value="permanente">
+                        <button type="submit" value="'.$row['id_permanente'].'" name="editar">Editar</button>
                     </form>
                 </td>
                 <td>
                     <form action="controle/processo_material.php" method="POST">
-                        <button type="submit" value="'.$row['id_material'].'" name="Excluir">Excluir</button>
+                        <input type="hidden" name="tipoMaterial" value="permanente">
+                        <button type="submit" value="'.$row['id_permanente'].'" name="Excluir">Excluir</button>
+                    </form>
+                </td>
+            </tr>';
+        }
+        ?>
+    </table>
+    <br>
+    <h3>Materiais de consumo cadastrados</h3>
+    <table border=1>
+        <tr>
+            <th>Especificação</th>
+            <th>Quantidade</th>
+            <th>Local</th>
+        </tr>
+        <?php 
+        while($row = mysqli_fetch_array($resultadoConsumo)){
+            echo'<tr>
+            <td>'.$row['especificacao'].'</td>
+            <td>'.$row['quantidade'].'</td>
+            <td>'.$row['nome'].'</td>
+            <td>
+                    <form action="editar_material.php" method="POST">
+                        <input type="hidden" name="tipoMaterial" value="consumo">
+                        <button type="submit" value="'.$row['id_consumo'].'" name="editar">Editar</button>
+                    </form>
+                </td>
+                <td>
+                    <form action="controle/processo_material.php" method="POST">
+                        <input type="hidden" name="tipoMaterial" value="consumo">
+                        <button type="submit" value="'.$row['id_consumo'].'" name="Excluir">Excluir</button>
                     </form>
                 </td>
             </tr>';

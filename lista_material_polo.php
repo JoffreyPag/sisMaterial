@@ -5,14 +5,14 @@ include_once("conexao.php");
     if(isset($_POST['departamento'])){
         $dpID = $_POST['departamento'];
         $sqlpolo = "SELECT t.numero_tombo, t.numero_serie, t.id_material, m.especificacao, d.id_departamento, d.nome, p.cidade FROM etec_tombo t 
-        INNER JOIN etec_materiais m ON t.id_material = m.id_material
+        INNER JOIN etec_materiais_permanentes m ON t.id_material = m.id_permanente
         INNER JOIN etec_departamento d ON t.id_departamento = d.id_departamento
         INNER JOIN etec_polo p ON d.idpolo = p.idpolo
         WHERE d.id_departamento = $dpID";
         
     }else{
         $sqlpolo = "SELECT t.numero_tombo, t.numero_serie, t.id_material, m.especificacao, d.id_departamento, d.nome, p.cidade FROM etec_tombo t 
-        INNER JOIN etec_materiais m ON t.id_material = m.id_material
+        INNER JOIN etec_materiais_permanentes m ON t.id_material = m.id_permanente
         INNER JOIN etec_departamento d ON t.id_departamento = d.id_departamento
         INNER JOIN etec_polo p ON d.idpolo = p.idpolo
         WHERE p.idpolo = $poloID";

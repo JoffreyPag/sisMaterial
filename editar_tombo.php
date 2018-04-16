@@ -3,7 +3,7 @@
     $idTombo = $_POST["editar"];
     //echo $idMaterial
     $sql = "SELECT t.numero_tombo, t.numero_serie, t.id_material, m.especificacao, d.id_departamento, d.nome, p.idpolo, p.cidade FROM etec_tombo t 
-    INNER JOIN etec_materiais m ON t.id_material = m.id_material
+    INNER JOIN etec_materiais_permanentes m ON t.id_material = m.id_permanente
     INNER JOIN etec_departamento d ON t.id_departamento = d.id_departamento
     INNER JOIN etec_polo p ON d.idpolo = p.idpolo
     WHERE t.numero_tombo = $idTombo";
@@ -44,10 +44,10 @@
                     <select name="material">
                         <option value="<?=$row['id_material']?>"><?=$row['especificacao']?></option>
                         <?php 
-                            $sql3 = "SELECT id_material, especificacao FROM etec_materiais";
+                            $sql3 = "SELECT id_permanente, especificacao FROM etec_materiais_permanentes";
                             $result3 = $conn->query($sql3);
                             while($row2 = mysqli_fetch_array($result3)){
-                                echo ' <option value="'.$row2['id_material'].'">'.$row2['especificacao'].'</option>';
+                                echo ' <option value="'.$row2['id_permanente'].'">'.$row2['especificacao'].'</option>';
                             }
                         ?>
                     </select>

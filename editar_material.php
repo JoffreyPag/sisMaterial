@@ -1,7 +1,12 @@
 <?php
     include_once("conexao.php");
     $idMaterial = $_POST['editar'];
-    $sql = "SELECT id_material, especificacao, acessorio, isConsumo, quantidade FROM etec_materiais WHERE id_material = '$idMaterial'";
+    $tipo = $_POST['tipoMaterial'];
+    if( $tipo == "permanente"){
+        $sql = "SELECT id_permanente, especificacao, acessorio FROM etec_materiais_permanentes WHERE id_permanente = '$idMaterial'";
+    }else{
+        $sql = "SELECT id_consumo, quantidade, especificacao ,id_departamento FROM etec_materiais_consumo WHERE id_consumo = '$idMaterial'";
+    }
     $result = $conn->query($sql);
     $row = mysqli_fetch_array($result);
 ?>
@@ -19,20 +24,21 @@
                 <td><input type="text" name="Especificacao" value="<?=$row['especificacao'] ?>" required/></td>
             </tr>
             <tr>
-                <th>Acessório(s)</th>
-                <td><input type="text" name="Acessorios" value="<?=$row['acessorio'] ?>" required/></td>
-            </tr>
-            <tr>
-                <th>Quantidade:</th>
-                <td><input type="number" name="quantidade" value="<?=$row['quantidade']?>" min="0"></td>
-            </tr>
-            <tr>
-                <th>Tipo material:</th>
-                <td><?=$row['isConsumo']? "Cosumo" : "Material Permanete"?></td>
+                <?php
+                    if( $tipo == "permanente"){
+                        echo '<th>Acessório(s)</th>
+                                <td><input type="text" name="Acessorios" value="'.$row['acessorio'].'" required/></td>';
+                    }else{
+                        echo '<th>Quantidade</th>
+                                <td><input type="number" name="quantidade" value="'.$row['quantidade'].'" min="0"></td>';
+                    }
+                ?>
+                
             </tr>
             <tr>
                 <td colspan="2">
-                <button type="submit" value="<?=$row['id_material'] ?>" name="Atualizar">Atualizar</button>
+                <input type="hidden" name="tipoMaterial" value="<?= $tipo=="permanente"? 'permanente' : 'consumo'?>">
+                <button type="submit" value="<?=$tipo=="permanente"? $row['id_permanente'] : $row['id_consumo'] ?>" name="Atualizar">Atualizar</button>
                 </td>
             </tr>
         </table>

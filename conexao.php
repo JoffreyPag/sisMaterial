@@ -2,7 +2,7 @@
 $servidor = 'localhost';
 $usuario = 'root';
 $senha = '';
-$banco = 'etec_adm';
+$banco = 'etec_adm_teste';
 // Conecta-se ao banco de dados MySQL
 $conn = new mysqli($servidor, $usuario, $senha, $banco);
 $conn->set_charset("utf8");
