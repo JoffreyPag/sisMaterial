@@ -1,9 +1,10 @@
 <?php
 include_once("../conexao.php");
 $id = $_POST['idGuia'];
+$tipo = $_POST['tipo'];
 $sql = "SELECT g.stats, g.numero_tombo, g.quantidade, g.justificativa, m.especificacao, p.municipio, p.cidade, o.municipio, o.cidade, d.nome, e.nome 
         FROM etec_guias g 
-        LEFT OUTER JOIN etec_materiais m ON m.id_material = g.id_material
+        LEFT OUTER JOIN ".(($tipo=="consumo")? "etec_materiais_consumo m ON m.id_consumo" : "etec_materiais_permanentes m ON m.id_permanente")." = g.id_material
         LEFT OUTER JOIN etec_departamento d ON d.id_departamento = g.id_origem
         LEFT OUTER JOIN etec_departamento e ON e.id_departamento = g.id_destino
         LEFT OUTER JOIN etec_polo p ON p.idpolo = d.idpolo
@@ -44,6 +45,7 @@ $result = $conn->query($sql);
                     </tr>';
             ?>
         </table>
+        <!--EDITAR AQUI -->
         <input type="hidden" name="Atualizar" value="<?=$id?>">
         <input type="submit" value="Atualizar">
     </form>

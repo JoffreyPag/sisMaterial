@@ -1,16 +1,19 @@
 <?php
 include_once("../conexao.php");
-/*$sql = "SELECT s.id_solicitacao, t.numero_tombo, s.quando, s.transportador, s.cpf , m.especificacao, d.nome, e.nome, s.stats FROM etec_solicitacoes s
-        INNER JOIN etec_tombo t ON s.numero_tombo = t.numero_tombo
-        INNER JOIN etec_materiais m ON t.id_material = m.id_material
-        LEFT OUTER JOIN etec_departamento d ON s.estava = d.id_departamento
-        INNER JOIN etec_departamento e ON s.foi = e.id_departamento";*/
-$sql = "SELECT g.id_guia, t.numero_tombo, g.dia, g.mes, g.ano, d.nome, e.nome, g.stats, m.especificacao FROM etec_guias g
-        LEFT OUTER JOIN etec_tombo t ON g.numero_tombo = t.numero_tombo
-        LEFT OUTER JOIN etec_departamento d ON g.id_origem = d.id_departamento
-        INNER JOIN etec_departamento e ON g.id_destino = e.id_departamento
-        LEFT OUTER JOIN etec_materiais m ON g.id_material = m.id_material".(isset($_POST['filtro'])?" WHERE g.stats = '".$_POST['filtro']."'" : "");
-$result = $conn->query($sql);         
+
+$sqlPermanente = "SELECT g.id_guia, t.numero_tombo, g.dia, g.mes, g.ano, d.nome, e.nome, g.stats, m.especificacao FROM etec_guias g
+                    LEFT OUTER JOIN etec_tombo t ON g.numero_tombo = t.numero_tombo
+                    LEFT OUTER JOIN etec_departamento d ON g.id_origem = d.id_departamento
+                    INNER JOIN etec_departamento e ON g.id_destino = e.id_departamento
+                    LEFT OUTER JOIN etec_materiais_permanentes m ON g.id_material = m.id_permanente
+                    WHERE g.isConsumo = false".(isset($_POST['filtro'])?" AND g.stats = '".$_POST['filtro']."'" : "");
+$sqlConsumo =  "SELECT g.id_guia, g.dia, g.mes, g.ano, d.nome, e.nome, g.stats, m.especificacao FROM etec_guias g
+                LEFT OUTER JOIN etec_departamento d ON g.id_origem = d.id_departamento
+                INNER JOIN etec_departamento e ON g.id_destino = e.id_departamento
+                LEFT OUTER JOIN etec_materiais_consumo m ON g.id_material = m.id_consumo
+                WHERE g.isConsumo = true".(isset($_POST['filtro'])?" AND g.stats = '".$_POST['filtro']."'" : "");
+$resultadoPermanente = $conn->query($sqlPermanente);
+$resultadoConsumo = $conn->query($sqlConsumo);          
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -29,6 +32,7 @@ $result = $conn->query($sql);
             </select>
             <input type="submit" value="Pesquisar">
         </form>
+    <h3>Permanentes</h3>
     <table border=1>
         <tr>
             <th>Status</th>
@@ -39,7 +43,7 @@ $result = $conn->query($sql);
             <th>Data</th>
         </tr>
         <?php
-        while($row = mysqli_fetch_array($result)){
+        while($row = mysqli_fetch_array($resultadoPermanente)){
             echo '<tr>
                     <td>'.$row['stats'].'</td>
                     <td>'.$row['numero_tombo'].'</td>
@@ -49,11 +53,39 @@ $result = $conn->query($sql);
                     <td>'.$row['dia'].'/'.$row['mes'].'/'.$row['ano'].'</td>
                     <td>
                         <form action="guia.php" method="POST">
+                            <input type="hidden" name="tipo" value="permanente">
                             <button type="submit" value="'.$row['id_guia'].'" name="guia">Ver mais</button>
                         </form>
                     </td>
             </tr>' ;
         }
+        ?>
+    </table>
+    <h3>Consumo</h3>
+    <table border=1>
+        <tr>
+            <th>Status</th>
+            <th>Material</th>
+            <th>De</th>
+            <th>Para</th>
+            <th>Data</th>
+        </tr>
+        <?php
+            while($row = mysqli_fetch_array($resultadoConsumo)){
+                echo '<tr>
+                        <td>'.$row['stats'].'</td>
+                        <td>'.$row['especificacao'].'</td>
+                        <td>'.$row[5].'</td>
+                        <td>'.$row[6].'</td>
+                        <td>'.$row['dia'].'/'.$row['mes'].'/'.$row['ano'].'</td>
+                        <td>
+                            <form action="guia.php" method="POST">
+                                <input type="hidden" name="tipo" value="consumo">
+                                <button type="submit" value="'.$row['id_guia'].'" name="guia">Ver mais</button>
+                            </form>
+                        </td>
+                    </tr>';
+            }
         ?>
     </table>
 </body>

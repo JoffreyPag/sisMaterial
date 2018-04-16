@@ -59,6 +59,7 @@ CREATE TABLE etec_guias(
 	id_origem int,
 	id_destino int,
 	id_material int,
+	isConsumo BOOLEAN,
 	responsavel VARCHAR(50),
 	justificativa TEXT,
 	numero_tombo VARCHAR(20),
@@ -72,8 +73,7 @@ CREATE TABLE etec_guias(
 	PRIMARY KEY(id_guia),
 	FOREIGN KEY(id_origem) REFERENCES etec_departamento(id_departamento),
 	FOREIGN KEY(id_destino) REFERENCES etec_departamento(id_departamento),
-	FOREIGN KEY(numero_tombo) REFERENCES etec_tombo(numero_tombo),
-	FOREIGN KEY(id_material) REFERENCES etec_materiais(id_material)
+	FOREIGN KEY(numero_tombo) REFERENCES etec_tombo(numero_tombo)
 );
 
  INSERT INTO etec_polo (idpolo, municipio, cidade, bairro, logradouro, numero, cep, telefone, shortname, ativo) VALUES
@@ -140,3 +140,6 @@ INSERT INTO etec_tombo VALUES
 ("2015007527", "BRJ446BZNP", 1, 1),
 ("2015007541", "BRJ451GTGT", 1, 1);
 
+INSERT INTO etec_guias (id_guia, id_origem, id_destino, id_material, isConsumo, responsavel, justificativa, numero_tombo, quantidade, entregador, destinatario, dia, mes, ano, stats) VALUES
+(1, 7, 1, 1, 1, 'Joffrey', 'Precisa', null, 70, 'João', 'Maria', day(CURRENT_DATE), month(CURRENT_DATE), year(CURRENT_DATE), 'ESPERANDO'),
+(2, 7, 2, 2, 1, 'Joffrey', 'Precisa tambem', null, 70, 'Jean', 'Mario', day(CURRENT_DATE), month(CURRENT_DATE), year(CURRENT_DATE), 'ESPERANDO');

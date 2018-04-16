@@ -1,5 +1,6 @@
 <?php
 include_once("../conexao.php");
+//EDITAR AQUI
 $sql = "SELECT id_material, isConsumo, especificacao, acessorio FROM etec_materiais";
 $result = $conn->query($sql);
 ?>

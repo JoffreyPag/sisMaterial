@@ -1,14 +1,16 @@
 <?php
 include_once("../conexao.php");
 $guiaID  = $_POST['guia'];
+$tipo = $_POST['tipo'];
 $sql = "SELECT d.nome, e.nome, p.municipio, p.cidade, o.municipio, o.cidade, m.especificacao, g.responsavel, g.justificativa, g.numero_tombo, g.quantidade, g.entregador, g.destinatario, g.dia, g.mes, g.ano, g.stats 
         FROM etec_guias g
         LEFT OUTER JOIN etec_departamento d ON g.id_origem = d.id_departamento
         LEFT OUTER JOIN etec_departamento e ON g.id_destino = e.id_departamento
         LEFT OUTER JOIN etec_polo p ON d.idpolo = p.idpolo
         LEFT OUTER JOIN etec_polo o ON e.idpolo = o.idpolo
-        LEFT OUTER JOIN etec_materiais m ON g.id_material = m.id_material
+        LEFT OUTER JOIN ".(($tipo=='consumo')? "etec_materiais_consumo m ON g.id_material = m.id_consumo" : "etec_materiais_permanentes m ON g.id_material = m.id_pendente") ."  
         WHERE g.id_guia = $guiaID";
+
 $result = $conn->query($sql);
 
 ?>
@@ -58,12 +60,14 @@ $result = $conn->query($sql);
         <th>
             <form action="editar_guia.php" method="POST">
                 <input type="hidden" name="idGuia" value="<?=$guiaID?>">
+                <input type="hidden" name="tipo" value="<?=$tipo?>">
                 <input type="submit" value="Editar" value="Editar">
             </form>
         </th>
         <th>
             <form action="../controle/processo_guia.php" method="POST">
                 <input type="hidden" name="idguia" value="<?=$guiaID?>">
+                <!--EDITAR AQUI -->
                 <input type="submit" name="Excluir" value="Excluir">
             </form>
         </th>
