@@ -1,8 +1,10 @@
 <?php
 include_once("../conexao.php");
 //EDITAR AQUI
-$sql = "SELECT id_material, isConsumo, especificacao, acessorio FROM etec_materiais";
-$result = $conn->query($sql);
+$sqlpermanente = "SELECT id_permanente, especificacao, acessorio FROM etec_materiais_permanentes";
+$sqlconsumo = "SELECT id_consumo, especificacao, quantidade, id_departamento FROM etec_materiais_consumo";
+$resultadopermanente = $conn->query($sqlpermanente);
+$resultadoconsumo = $conn->query($sqlconsumo);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -14,31 +16,46 @@ $result = $conn->query($sql);
     <h4>Selecione o material</h4>
         <table>
             <tr>
+                <th colspan=2> Materiais Permanentes</th>
+            </tr>
+            <tr>
                 <th>Especificação</th>
                 <th>Acessorio</th>
             </tr>
             
             <?php
-                while($row = mysqli_fetch_array($result)){
+                while($row = mysqli_fetch_array($resultadopermanente)){
                     echo '<tr>
                             <td>'.$row['especificacao'].'</td>
                             <td>'.$row['acessorio'].'</td>
-                            <td>'.$row['isConsumo'].'</td>
-                            <td>';
+                            <td>
+                                <form action="novoGuiaet2.php" method="POST">
+                                    <button type="submit" value="'.$row['id_permanente'].'" name="escolhido">Solicitar</button>
+                                </form>
+                            </td>
+                            </tr>';
+                }
+            ?>
+            <tr>
+                <th colspan=2>Materias de Consumo</th>
+            </tr>
+            <tr>
+                <th></th>
+                <th>Quantidade</th>
+            </tr>
+            <?php
+                while($row = mysqli_fetch_array($resultadoconsumo)){
+                    echo '<tr>
+                            <td>'.$row['especificacao'].'</td>
+                            <td>'.$row['quantidade'].'</td>
+                            <td>
+                                <form action="novoGuiaet3.php" method="POST">
+                                    <input type="hidden" name="dp" value="'.$row['id_departamento'].'">
+                                    <button type="submit" value="'.$row['id_consumo'].'"name="escolhido">Solicitar</button>
+                                </form>
+                            </td>
+                            </tr>';
 
-                    if($row['isConsumo']==0){
-                        echo '<form action="novoGuiaet2.php" method="POST">
-                            <button type="submit" value="'.$row['id_material'].'" name="escolhido">Solicitar</button>
-                            </form>
-                            </td>
-                            </tr>';
-                    }else{
-                        echo '<form action="novoGuiaet3.php" method="POST">
-                            <button type="submit" value="'.$row['id_material'].'" name="escolhido">Solicitar</button>
-                            </form>
-                            </td>
-                            </tr>';
-                    }
                 }
             ?>
         </table>

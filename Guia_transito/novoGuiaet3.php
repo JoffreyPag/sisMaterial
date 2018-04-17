@@ -1,17 +1,21 @@
 <?php
 include_once("../conexao.php");
-$sqlSetor = "SELECT d.id_departamento, d.nome, p.municipio, p.cidade FROM etec_departamento d
+$sqlSetorD = "SELECT d.id_departamento, d.nome, p.municipio, p.cidade FROM etec_departamento d
             INNER JOIN etec_polo p ON d.idpolo = p.idpolo";
-$resultOrigem = $conn->query($sqlSetor);
-$resultDestino = $conn->query($sqlSetor);
+$resultDestino = $conn->query($sqlSetorD);
 if(isset($_POST['numeroTombo'])){
     $ntombo = $_POST['numeroTombo'];
-    $sql = "SELECT m.especificacao, m.acessorio, m.id_material FROM etec_materiais m
-            INNER JOIN etec_tombo t ON m.id_material = t.id_material
+    $sql = "SELECT m.especificacao, m.acessorio, m.id_permanente FROM etec_materiais_permanentes m
+            INNER JOIN etec_tombo t ON m.id_permanente = t.id_material
             WHERE t.numero_tombo = $ntombo";   
 }elseif(isset($_POST['escolhido'])){
     $id = $_POST['escolhido'];
-    $sql = "SELECT especificacao, acessorio, id_material FROM etec_materiais WHERE id_material = $id";
+    $iddp = $_POST['dp'];
+    $sql = "SELECT especificacao, id_consumo, quantidade FROM etec_materiais_consumo WHERE id_consumo = $id";
+    $sqlSetorO = "SELECT d.id_departamento, d.nome, p.municipio, p.cidade FROM etec_departamento d
+            INNER JOIN etec_polo p ON d.idpolo = p.idpolo
+            WHERE id_departamento = $iddp";
+    $resultOrigem = $conn->query($sqlSetorO);
 }
 
 //echo $row['especificacao']
@@ -91,8 +95,13 @@ if(isset($_POST['numeroTombo'])){
                     $result = $conn->query($sql);
                     $row = mysqli_fetch_array($result);
 
-                    echo '<td>'.$row['especificacao'].'</td>
-                        <td>'.$row['acessorio'].'<input type="hidden" name="idMaterial" value='.$row['id_material'].'></td>';
+                    if(isset($_POST['escolhido'])){
+                        echo '<td>'.$row['especificacao'].'<input type="hidden" name="idMaterial" value='.$row['id_consumo'].'></td>
+                        <td> </td>';
+                    }else{
+                        echo '<td>'.$row['especificacao'].'</td>
+                            <td>'.$row['acessorio'].'<input type="hidden" name="idMaterial" value='.$row['id_material'].'></td>';
+                    }
                 ?>
             </tr>
         </table>
