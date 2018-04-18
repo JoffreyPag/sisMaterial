@@ -17,7 +17,8 @@ if(isset($_POST['numeroTombo'])){
             WHERE id_departamento = $iddp";
     $resultOrigem = $conn->query($sqlSetorO);
 }
-
+$result = $conn->query($sql);
+$r = mysqli_fetch_array($result);
 //echo $row['especificacao']
 ?>
 <!DOCTYPE html>
@@ -86,22 +87,24 @@ if(isset($_POST['numeroTombo'])){
                 </td>
                 <td><?php
                     if(!isset($_POST['numeroTombo'])){
-                        echo '<input type="number" name="qtd" id="" min="1" value="1">' ;   
+                        echo '<input type="number" name="qtd" id="" min="1" max="'.$r['quantidade'].'" value="1">' ;   
                     }
                     ?>
                     </td>
                     
                 <?php
-                    $result = $conn->query($sql);
-                    $row = mysqli_fetch_array($result);
+                    
 
                     if(isset($_POST['escolhido'])){
-                        echo '<td>'.$row['especificacao'].'<input type="hidden" name="idMaterial" value='.$row['id_consumo'].'></td>
-                        <td> </td>';
+                        echo '<td>'.$r['especificacao'].'<input type="hidden" name="idMaterial" value='.$r['id_consumo'].'></td>
+                        <td><input type="hidden" name="tipo" value="consumo"></td>';
                     }else{
-                        echo '<td>'.$row['especificacao'].'</td>
-                            <td>'.$row['acessorio'].'<input type="hidden" name="idMaterial" value='.$row['id_material'].'></td>';
+                        echo '<td>'.$r['especificacao'].'</td>
+                            <td>'.$r['acessorio'].'<input type="hidden" name="idMaterial" value='.$r['id_permanente'].'>
+                            <input type="hidden" name="tipo" value="permanente">
+                            </td>';
                     }
+
                 ?>
             </tr>
         </table>

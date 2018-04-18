@@ -3,6 +3,7 @@ include_once("../conexao.php");
 
 
 if(isset($_POST['Cadastrar'])){
+    //TODO EDITAR AQUI!!
     $so = $_POST['setorOrigem'];
     $sd = $_POST['setorDestino'];
     $resp = $_POST['responsavel'];
