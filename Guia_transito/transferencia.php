@@ -2,7 +2,7 @@
 include_once("../conexao.php");
     $nt = $_POST['mover'];
     $sql = "SELECT t.numero_tombo, t.id_material, m.especificacao, m.acessorio, t.id_departamento ,d.nome, p.municipio, p.cidade FROM etec_tombo t
-            INNER JOIN etec_materiais m ON t.id_material = m.id_material
+            INNER JOIN etec_materiais_permanentes m ON t.id_material = m.id_permanente
             INNER JOIN etec_departamento d ON t.id_departamento = d.id_departamento
             INNER JOIN etec_polo p ON d.idpolo = p.idpolo
             WHERE t.numero_tombo = $nt";
@@ -18,7 +18,7 @@ include_once("../conexao.php");
 </head>
 <body>
     <form action="../controle/processo_guia.php" method="post">
-        <input type="hidden" name="idvelha" value="<?=$row['id_departamento']?>">
+        <input type="hidden" name="setorOrigem" value="<?=$row['id_departamento']?>">
         <input type="hidden" name="ntombo" value="<?=$row['numero_tombo']?>">
         <input type="hidden" name="idMaterial" value="<?=$row['id_material']?>">
         <table border=1>
@@ -35,7 +35,10 @@ include_once("../conexao.php");
                         $resultDestino = $conn->query($sqlSetor);
                         echo '<select name="setorDestino">';
                         while($row2 = mysqli_fetch_array($resultDestino)){
-                            echo '<option value="'.$row2['id_departamento'].'">'.$row2['municipio'].'/'.$row2['cidade'].'-'.$row2['nome'].'</option>';
+                            //para evitar que alguem tente mandar um intem de um setor para o mesmo setor
+                            if($row2['id_departamento'] != $row['id_departamento']){
+                                echo '<option value="'.$row2['id_departamento'].'">'.$row2['municipio'].'/'.$row2['cidade'].'-'.$row2['nome'].'</option>';
+                            }
                         }
                         echo '</select>';
                     ?>

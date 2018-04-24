@@ -8,11 +8,11 @@ $sql = "SELECT d.nome, e.nome, p.municipio, p.cidade, o.municipio, o.cidade, m.e
         LEFT OUTER JOIN etec_departamento e ON g.id_destino = e.id_departamento
         LEFT OUTER JOIN etec_polo p ON d.idpolo = p.idpolo
         LEFT OUTER JOIN etec_polo o ON e.idpolo = o.idpolo
-        LEFT OUTER JOIN ".(($tipo=='consumo')? "etec_materiais_consumo m ON g.id_material = m.id_consumo" : "etec_materiais_permanentes m ON g.id_material = m.id_pendente") ."  
+        LEFT OUTER JOIN ".(($tipo=='consumo')? "etec_materiais_consumo m ON g.id_material = m.id_consumo" : "etec_materiais_permanentes m ON g.id_material = m.id_permanente") ."  
         WHERE g.id_guia = $guiaID";
 
 $result = $conn->query($sql);
-
+$row = mysqli_fetch_array($result);
 ?>
 
 <!DOCTYPE html>
@@ -38,31 +38,37 @@ $result = $conn->query($sql);
         <th>Data</th>
     </tr>
     <?php
-        while($row = mysqli_fetch_array($result)){
-            echo '<tr>
-                    <td>'.$row['stats'].'</td>            
-                    <td>'.$row['numero_tombo'].'</td>
-                    <td>'.$row['especificacao'].'</td>
-                    <td>'.$row['quantidade'].'</td>
-                    <td>'.$row[2].' - '.$row[3].' - '.$row[0].'</td>
-                    <td>'.$row[4].' - '.$row[5].' - '.$row[1].'</td>
-                    <td>'.$row['justificativa'].'</td>
-                    <td>'.$row['responsavel'].'</td>
-                    <td>'.$row['entregador'].'</td>
-                    <td>'.$row['destinatario'].'</td>
-                    <td>'.$row['dia'].'/'.$row['mes'].'/'.$row['ano'].'</td>
-            </tr>';
-        }
+        echo '<tr>
+                <td>'.$row['stats'].'</td>            
+                <td>'.$row['numero_tombo'].'</td>
+                <td>'.$row['especificacao'].'</td>
+                <td>'.$row['quantidade'].'</td>
+                <td>'.$row[2].' - '.$row[3].' - '.$row[0].'</td>
+                <td>'.$row[4].' - '.$row[5].' - '.$row[1].'</td>
+                <td>'.$row['justificativa'].'</td>
+                <td>'.$row['responsavel'].'</td>
+                <td>'.$row['entregador'].'</td>
+                <td>'.$row['destinatario'].'</td>
+                <td>'.$row['dia'].'/'.$row['mes'].'/'.$row['ano'].'</td>
+        </tr>';
     ?>
 </table>
 <table>
     <tr>
         <th>
-            <form action="editar_guia.php" method="POST">
-                <input type="hidden" name="idGuia" value="<?=$guiaID?>">
-                <input type="hidden" name="tipo" value="<?=$tipo?>">
-                <input type="submit" value="Editar" value="Editar">
-            </form>
+            <?php 
+                if($row['stats'] != "ENTREGUE"){
+                    echo '<form action="editar_guia.php" method="POST">
+                            <input type="hidden" name="idGuia" value="'.$guiaID.'">
+                            <input type="hidden" name="tipo" value="'.$tipo.'">
+                            <input type="submit" value="Editar" value="Editar">
+                        </form>';
+                }else{
+
+                }
+            
+            ?>
+            
         </th>
         <th>
             <form action="../controle/processo_guia.php" method="POST">

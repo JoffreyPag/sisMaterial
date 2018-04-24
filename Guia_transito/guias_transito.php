@@ -6,12 +6,14 @@ $sqlPermanente = "SELECT g.id_guia, t.numero_tombo, g.dia, g.mes, g.ano, d.nome,
                     LEFT OUTER JOIN etec_departamento d ON g.id_origem = d.id_departamento
                     INNER JOIN etec_departamento e ON g.id_destino = e.id_departamento
                     LEFT OUTER JOIN etec_materiais_permanentes m ON g.id_material = m.id_permanente
-                    WHERE g.isConsumo = false".(isset($_POST['filtro'])?" AND g.stats = '".$_POST['filtro']."'" : "");
+                    WHERE g.isConsumo = false".(isset($_POST['filtro'])?" AND g.stats = '".$_POST['filtro']."'" : "").
+                    " ORDER BY id_guia DESC";
 $sqlConsumo =  "SELECT g.id_guia, g.dia, g.mes, g.ano, d.nome, e.nome, g.stats, m.especificacao FROM etec_guias g
                 LEFT OUTER JOIN etec_departamento d ON g.id_origem = d.id_departamento
                 INNER JOIN etec_departamento e ON g.id_destino = e.id_departamento
                 LEFT OUTER JOIN etec_materiais_consumo m ON g.id_material = m.id_consumo
-                WHERE g.isConsumo = true".(isset($_POST['filtro'])?" AND g.stats = '".$_POST['filtro']."'" : "");
+                WHERE g.isConsumo = true".(isset($_POST['filtro'])?" AND g.stats = '".$_POST['filtro']."'" : "").
+                " ORDER BY id_guia DESC";
 $resultadoPermanente = $conn->query($sqlPermanente);
 $resultadoConsumo = $conn->query($sqlConsumo);          
 ?>

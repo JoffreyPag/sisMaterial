@@ -10,13 +10,14 @@ if(isset($_POST['numeroTombo'])){
             WHERE t.numero_tombo = $ntombo";   
 }elseif(isset($_POST['escolhido'])){
     $id = $_POST['escolhido'];
-    $iddp = $_POST['dp'];
     $sql = "SELECT especificacao, id_consumo, quantidade FROM etec_materiais_consumo WHERE id_consumo = $id";
-    $sqlSetorO = "SELECT d.id_departamento, d.nome, p.municipio, p.cidade FROM etec_departamento d
+}
+$iddp = $_POST['dp'];
+$sqlSetorO = "SELECT d.id_departamento, d.nome, p.municipio, p.cidade FROM etec_departamento d
             INNER JOIN etec_polo p ON d.idpolo = p.idpolo
             WHERE id_departamento = $iddp";
-    $resultOrigem = $conn->query($sqlSetorO);
-}
+$resultOrigem = $conn->query($sqlSetorO);
+
 $result = $conn->query($sql);
 $r = mysqli_fetch_array($result);
 //echo $row['especificacao']
@@ -43,6 +44,7 @@ $r = mysqli_fetch_array($result);
                         <?php 
                             while($row = mysqli_fetch_array($resultOrigem)){
                                 echo '<option value="'.$row['id_departamento'].'">'.$row['municipio'].'/'.$row['cidade'].'-'.$row['nome'].'</option>';
+                                //echo '<input type="hidden" name="" value="">'
                             }
                         ?>      
                     </select>

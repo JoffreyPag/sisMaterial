@@ -35,12 +35,14 @@
                         <button type="submit" value="'.$row['id_permanente'].'" name="editar">Editar</button>
                     </form>
                 </td>
+                <!-- NO MOMENTO NÃO É BOM USAR ISSO AQUI
                 <td>
                     <form action="controle/processo_material.php" method="POST">
                         <input type="hidden" name="tipoMaterial" value="permanente">
                         <button type="submit" value="'.$row['id_permanente'].'" name="Excluir">Excluir</button>
                     </form>
                 </td>
+                -->
             </tr>';
         }
         ?>
@@ -65,12 +67,14 @@
                         <button type="submit" value="'.$row['id_consumo'].'" name="editar">Editar</button>
                     </form>
                 </td>
+                <!-- NO MOMENTO NÃO É BOM USAR ISSO AQUI
                 <td>
                     <form action="controle/processo_material.php" method="POST">
                         <input type="hidden" name="tipoMaterial" value="consumo">
                         <button type="submit" value="'.$row['id_consumo'].'" name="Excluir">Excluir</button>
                     </form>
                 </td>
+                -->
             </tr>';
         }
         ?>

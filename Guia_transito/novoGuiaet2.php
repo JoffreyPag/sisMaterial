@@ -1,9 +1,9 @@
 <?php
 include_once("../conexao.php");
 $id_material = $_POST['escolhido'];
-$sql = "SELECT t.numero_tombo, t.numero_serie, d.nome, m.especificacao, m.acessorio FROM etec_tombo t
+$sql = "SELECT t.numero_tombo, t.numero_serie, t.id_departamento ,d.nome, m.especificacao, m.acessorio FROM etec_tombo t
         INNER JOIN etec_departamento d ON d.id_departamento = t.id_departamento
-        INNER JOIN etec_materiais m ON m.id_material = t.id_material
+        INNER JOIN etec_materiais_permanentes m ON m.id_permanente = t.id_material
         WHERE t.id_material = $id_material AND d.isestoque = 1";
 $result = $conn->query($sql);
 //$row = mysqli_fetch_array($result);
@@ -35,6 +35,7 @@ $result = $conn->query($sql);
                         <td>'.$row['especificacao'].'</td>
                         <td>'.$row['nome'].'</td>
                         <td><form action="novoGuiaet3.php" method="POST">
+                            <input type="hidden" name="dp" value="'.$row['id_departamento'].'">
                             <button type="submit" value="'.$row['numero_tombo'].'" name="numeroTombo">Confirmar</button>
                         </form></td>
                     </tr>';
