@@ -5,3 +5,14 @@
 //NA SEGUNDA ETAPA TERA CHECKBOX PARA CADA TOMBO DE TODOS OS MATERIAS PARA LEVAR PRA TERCEIRA ETAPA
 //NA TERCEIRA LISTA TODOS OS TOMBOS SELECIONADOS
 ?>
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Novo Guia - Selecionar material</title>
+</head>
+<body>
+    
+</body>
+</html>
