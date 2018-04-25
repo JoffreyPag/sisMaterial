@@ -16,8 +16,8 @@ $result = $conn->query($sql);
     <meta charset="UTF-8">
     <title>Novo Guia</title>
 </head>
-<body>
-
+<body>                          
+                        
 <h4>Tombos encontrados disponiveis</h4>
     <?php
         if($result->num_rows > 0){
@@ -34,10 +34,11 @@ $result = $conn->query($sql);
                         <td>'.$row['numero_serie'].'</td>
                         <td>'.$row['especificacao'].'</td>
                         <td>'.$row['nome'].'</td>
-                        <td><form action="novoGuiaet3.php" method="POST">
+                        <td><form action="novoGuiaet3.php" method="post">
                             <input type="hidden" name="dp" value="'.$row['id_departamento'].'">
                             <button type="submit" value="'.$row['numero_tombo'].'" name="numeroTombo">Confirmar</button>
-                        </form></td>
+                            </form>
+                        </td>
                     </tr>';
             }
             echo '</table>';
@@ -46,6 +47,8 @@ $result = $conn->query($sql);
             echo '<h4>Nenhum em estoque</h4>';
         }
     ?>
+    <input type="submit" value="Confirm">
+    </form>
     <a href="novoGuiaet1.php">Voltar</a>
 </body>
 </html>

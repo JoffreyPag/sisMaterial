@@ -1,5 +1,7 @@
 <?php
-if(isset($_POST['Atualizar'])){
-    echo sucesso;
+$opcs = $_GET['opcao'];
+foreach($opcs as $opc){
+    echo $opc . "<br/>";
 }
+
 ?>

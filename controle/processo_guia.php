@@ -32,6 +32,8 @@ if(isset($_POST['Cadastrar'])){
     $qtd = $_POST['qtd'];
     $tipo = $_POST['tipo'];
     $idm = $_POST['id'];
+    $entregador = $_POST['entregador'];
+    $dest = $_POST['destinatario'];
 
     if ($tipo=="consumo") {
         $atConsumo = "UPDATE etec_materiais_consumo SET quantidade = quantidade - $qtd WHERE id_consumo = $idm";
@@ -43,7 +45,7 @@ if(isset($_POST['Cadastrar'])){
         $tempquery = $conn->query($atPermanente);
     }
     $sql = "UPDATE etec_guias 
-            SET stats = '$estd' WHERE id_guia = '$id'";
+            SET stats = '$estd', destinatario = '$dest', entregador = '$entregador' WHERE id_guia = '$id'";
 }
 //NOT IN USE YET
 elseif(isset($_POST['Movimentar'])){
