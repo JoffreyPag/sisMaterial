@@ -186,7 +186,8 @@ CREATE TABLE numero_tombos(
 	t17 VARCHAR(20),
 	t18 VARCHAR(20),
 	t19 VARCHAR(20),
-	t20 VARCHAR(20)
+	t20 VARCHAR(20),
+	PRIMARY KEY(id_tombos)
 );
 
 /*
