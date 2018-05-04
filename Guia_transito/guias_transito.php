@@ -1,21 +1,16 @@
 <?php
 include_once("../conexao.php");
+$sqlguias = "SELECT g.id_tombos, g.id_origem, g.id_destino, g.stats, g.dia, g.mes, g.ano,
+                    dor.nome, pd.municipio, pd.cidade, g.id_guia 
+            FROM etec_guias_lab g 
+            INNER JOIN etec_departamento dor ON g.id_origem = dor.id_departamento 
+            INNER JOIN etec_departamento dd ON g.id_destino = dd.id_departamento 
+            INNER JOIN etec_polo pd ON dd.idpolo = pd.idpolo".
+            (isset($_POST['filtro'])?" WHERE g.stats = '".$_POST['filtro']."'":"").
+            " ORDER BY id_guia DESC";
 
-$sqlPermanente = "SELECT g.id_guia, t.numero_tombo, g.dia, g.mes, g.ano, d.nome, e.nome, g.stats, m.especificacao FROM etec_guias g
-                    LEFT OUTER JOIN etec_tombo t ON g.numero_tombo = t.numero_tombo
-                    LEFT OUTER JOIN etec_departamento d ON g.id_origem = d.id_departamento
-                    INNER JOIN etec_departamento e ON g.id_destino = e.id_departamento
-                    LEFT OUTER JOIN etec_materiais_permanentes m ON g.id_material = m.id_permanente
-                    WHERE g.isConsumo = false".(isset($_POST['filtro'])?" AND g.stats = '".$_POST['filtro']."'" : "").
-                    " ORDER BY id_guia DESC";
-$sqlConsumo =  "SELECT g.id_guia, g.dia, g.mes, g.ano, d.nome, e.nome, g.stats, m.especificacao FROM etec_guias g
-                LEFT OUTER JOIN etec_departamento d ON g.id_origem = d.id_departamento
-                INNER JOIN etec_departamento e ON g.id_destino = e.id_departamento
-                LEFT OUTER JOIN etec_materiais_consumo m ON g.id_material = m.id_consumo
-                WHERE g.isConsumo = true".(isset($_POST['filtro'])?" AND g.stats = '".$_POST['filtro']."'" : "").
-                " ORDER BY id_guia DESC";
-$resultadoPermanente = $conn->query($sqlPermanente);
-$resultadoConsumo = $conn->query($sqlConsumo);          
+$resultguias = $conn->query($sqlguias);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -26,8 +21,7 @@ $resultadoConsumo = $conn->query($sqlConsumo);
 <body>
     <h1>Guias</h1>
     <a href="../index.php">Voltar</a>
-    <!--<a href="novoGuiaet1.php"><input type="button" value="Gerar novo guia"></a> -->
-    <a href="../Guia_teste/novoGuia1.php"><input type="button" value="Gerar novo guia"></a>
+    <a href="novoGuia1.php"><input type="button" value="Gerar novo guia"></a>
     <form action="guias_transito.php" method="POST">
             <select name="filtro">
                 <option value="ENTREGUE">ENTREGUE</option>
@@ -35,51 +29,20 @@ $resultadoConsumo = $conn->query($sqlConsumo);
             </select>
             <input type="submit" value="Pesquisar">
         </form>
-    <h3>Permanentes</h3>
+    <h3>Guias cadastrados</h3>
     <table border=1>
         <tr>
             <th>Status</th>
-            <th>Numero Tombo</th>
-            <th>Material</th>
             <th>De</th>
             <th>Para</th>
             <th>Data</th>
         </tr>
         <?php
-        while($row = mysqli_fetch_array($resultadoPermanente)){
-            echo '<tr>
-                    <td>'.$row['stats'].'</td>
-                    <td>'.$row['numero_tombo'].'</td>
-                    <td>'.$row['especificacao'].'</td>
-                    <td>'.$row[5].'</td>
-                    <td>'.$row[6].'</td>
-                    <td>'.$row['dia'].'/'.$row['mes'].'/'.$row['ano'].'</td>
-                    <td>
-                        <form action="guia.php" method="POST">
-                            <input type="hidden" name="tipo" value="permanente">
-                            <button type="submit" value="'.$row['id_guia'].'" name="guia">Ver mais</button>
-                        </form>
-                    </td>
-            </tr>' ;
-        }
-        ?>
-    </table>
-    <h3>Consumo</h3>
-    <table border=1>
-        <tr>
-            <th>Status</th>
-            <th>Material</th>
-            <th>De</th>
-            <th>Para</th>
-            <th>Data</th>
-        </tr>
-        <?php
-            while($row = mysqli_fetch_array($resultadoConsumo)){
+            while($row = mysqli_fetch_array($resultguias)){
                 echo '<tr>
                         <td>'.$row['stats'].'</td>
-                        <td>'.$row['especificacao'].'</td>
-                        <td>'.$row[5].'</td>
-                        <td>'.$row[6].'</td>
+                        <td>'.$row[7].'</td>
+                        <td>'.$row[8].'/'.$row[9].'</td>
                         <td>'.$row['dia'].'/'.$row['mes'].'/'.$row['ano'].'</td>
                         <td>
                             <form action="guia.php" method="POST">

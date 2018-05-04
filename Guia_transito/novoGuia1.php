@@ -17,6 +17,7 @@ $result = $conn->query($sql);
     <title>Novo Guia - Selecionar material</title>
 </head>
 <body>
+<a href="../Guia_transito/guias_transito.php">Voltar</a>
     <form action="novoGuia2.php" method="post">
         <table>
             <tr>

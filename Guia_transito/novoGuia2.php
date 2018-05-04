@@ -27,7 +27,7 @@ $(document).ready(function () {
 });
 
 </script>
-
+<a href="../Guia_transito/novoGuia1.php">Voltar</a>
 
     <form action="novoGuia2.php" method="post">
         <select name="estoque" id="">
