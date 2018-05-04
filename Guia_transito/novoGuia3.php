@@ -15,7 +15,7 @@ $iddp = $_POST['departamento'];
     <title>Novo guia - Finalizar pedido</title>
 </head>
 <body>
-    <form action="#" method="post">
+    <form action="../Guia_teste/processoGuia.php" method="post">
         <table border=1>
             <tr>
                 <th>Setor de origem:</th>
@@ -27,7 +27,7 @@ $iddp = $_POST['departamento'];
                         $resultSO = $conn->query($setorO);
                         $row = mysqli_fetch_array($resultSO);
                         echo $row['municipio'].'/'.$row['cidade'].'-'.$row['nome'];
-                        echo '<input type="hidden" name="departamento" value="'.$iddp.'">';
+                        echo '<input type="hidden" name="setorOrigem" value="'.$iddp.'">';
                     ?>
                 </td>
             </tr>
@@ -37,7 +37,7 @@ $iddp = $_POST['departamento'];
                     <select name="setorDestino">
                         <?php
                             $sqlSetorD = "SELECT d.id_departamento, d.nome, p.municipio, p.cidade FROM etec_departamento d
-                            INNER JOIN etec_polo p ON d.idpolo = p.idpolo";
+                                            INNER JOIN etec_polo p ON d.idpolo = p.idpolo";
                             $resultDestino = $conn->query($sqlSetorD); 
                             while($row = mysqli_fetch_array($resultDestino)){
                                 echo '<option value="'.$row['id_departamento'].'">'.$row['municipio'].'/'.$row['cidade'].'-'.$row['nome'].'</option>';
@@ -69,13 +69,14 @@ $iddp = $_POST['departamento'];
                     $result = $conn->query($sql);
                     $row = mysqli_fetch_array($result);
                     echo '<tr>
-                            <td>'.$row['numero_tombo'].'</td>
-                            <td>'.$row['especificacao'].'</td>
-                            <td>'.$row['acessorio'].'</td>
+                            <td>'.$row['numero_tombo'].'<input type="hidden" name="ntombos[]" value="'.$row['numero_tombo'].'"></td>
+                            <td>'.$row['especificacao'].'<input type="hidden" name="especificacoes[]" value="'.$row['especificacao'].'"></td>
+                            <td>'.$row['acessorio'].'<input type="hidden" name="acessorios[]" value="'.$row['acessorio'].'"></td>
                         </tr>';
                 }
-            ?>
+            ?>  
         </table>
+        <input type="submit" value="Cadastrar" name="Cadastrar">
     </form>
 </body>
 </html>

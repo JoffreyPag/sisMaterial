@@ -152,7 +152,6 @@ CREATE TABLE etec_guias_lab (
 	id_destino int,
 	responsavel VARCHAR(50),
 	justificativa TEXT,
-	numero_tombos TEXT,
 	entregador VARCHAR(50),
 	destinatario VARCHAR(50),
 	dia int,
