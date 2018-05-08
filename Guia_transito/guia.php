@@ -1,20 +1,23 @@
 <?php
 include_once("../conexao.php");
-$guiaID  = $_POST['guia'];
-$tipo = $_POST['tipo'];
-$sql = "SELECT d.nome, e.nome, p.municipio, p.cidade, o.municipio, o.cidade, m.especificacao, g.responsavel, g.justificativa, g.numero_tombo, g.quantidade, g.entregador, g.destinatario, g.dia, g.mes, g.ano, g.stats 
-        FROM etec_guias g
-        LEFT OUTER JOIN etec_departamento d ON g.id_origem = d.id_departamento
-        LEFT OUTER JOIN etec_departamento e ON g.id_destino = e.id_departamento
-        LEFT OUTER JOIN etec_polo p ON d.idpolo = p.idpolo
-        LEFT OUTER JOIN etec_polo o ON e.idpolo = o.idpolo
-        LEFT OUTER JOIN ".(($tipo=='consumo')? "etec_materiais_consumo m ON g.id_material = m.id_consumo" : "etec_materiais_permanentes m ON g.id_material = m.id_permanente") ."  
+//$guiaID  = $_POST['guia'];
+$guiaID  = 1;
+$sql = "SELECT pd.municipio, pd.cidade, dd.nome, dor.nome, 
+                g.responsavel, g.justificativa, g.entregador, g.destinatario, 
+                g.dia, g.mes, g.ano, g.stats, g.id_tombos 
+        FROM etec_guias_lab g 
+        LEFT OUTER JOIN etec_departamento dor ON g.id_origem = dor.id_departamento 
+        LEFT OUTER JOIN etec_departamento dd ON g.id_destino = dd.id_departamento 
+        LEFT OUTER JOIN etec_polo pd ON dd.idpolo = pd.idpolo 
         WHERE g.id_guia = $guiaID";
-
 $result = $conn->query($sql);
 $row = mysqli_fetch_array($result);
-?>
 
+$sql = "SELECT * FROM numero_tombos WHERE id_tombos = ".$row['id_tombos'];
+$resultombos = $conn->query($sql);
+$rowtombos = mysqli_fetch_array($resultombos);
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,51 +25,82 @@ $row = mysqli_fetch_array($result);
     <title>Guia</title>
 </head>
 <body>
-<a href="guias_transito.php">Voltar</a>
-<table border=1>
-    <tr>
-        <th>Status</th>
-        <th>Numero tombo</th>
-        <th>Material</th>
-        <th>Quantidade</th>
-        <th>Origem</th>
-        <th>Destino</th>
-        <th>Justificativa</th>
-        <th>Responsavel</th>
-        <th>Entregador</th>
-        <th>Destinatário</th>
-        <th>Data</th>
-    </tr>
-    <?php
-        echo '<tr>
-                <td>'.$row['stats'].'</td>            
-                <td>'.$row['numero_tombo'].'</td>
-                <td>'.$row['especificacao'].'</td>
-                <td>'.$row['quantidade'].'</td>
-                <td>'.$row[2].' - '.$row[3].' - '.$row[0].'</td>
-                <td>'.$row[4].' - '.$row[5].' - '.$row[1].'</td>
-                <td>'.$row['justificativa'].'</td>
-                <td>'.$row['responsavel'].'</td>
-                <td>'.$row['entregador'].'</td>
-                <td>'.$row['destinatario'].'</td>
-                <td>'.$row['dia'].'/'.$row['mes'].'/'.$row['ano'].'</td>
-        </tr>';
-    ?>
-</table>
-<table>
+    <a href="guias_transito.php">Voltar</a>
+    <table border=1>
+        <tr>
+            <th>Status</th>
+            <th>Origem</th>
+            <th>Destino</th>
+            <th>Justificativa</th>
+            <th>Responsavel</th>
+            <th>Entregador</th>
+            <th>Destinatário</th>
+            <th>Data</th>
+        </tr>
+        <?php
+            echo '<tr>
+                    <td>'.$row['stats'].'</td>
+                    <td>'.$row[3].'</td>
+                    <td>'.$row[0].'/'.$row[1].'-'.$row[2].'</td>
+                    <td>'.$row['justificativa'].'</td>
+                    <td>'.$row['responsavel'].'</td>
+                    <td>'.$row['entregador'].'</td>
+                    <td>'.$row['destinatario'].'</td>
+                    <td>'.$row['dia'].'/'.$row['mes'].'/'.$row['ano'].'</td>
+                </tr>';
+        ?>
+    </table>
+    <br>
+    <table border = 1>
+        <tr>
+            <th>Numero(s) de tombo(s)</th>
+            <th>Material</th>
+        </tr>
+        <tr>
+            <?php
+                echo '<td>
+                        <ul>';
+                for($i=1; $i <= 20; $i++){
+                    if($rowtombos[$i] != null){
+                        //numeros de tombos
+                        echo '<li>'.$rowtombos[$i].'</li>';
+                    }else{
+                        break;
+                    }
+                }
+                echo '</ul>
+                    </td>
+                    <td>
+                        <ul>';
+                //materiais
+                for($j=1;$j<=20;$j++){
+                    if($rowtombos[$j] != null){
+                        $sqltombo = "SELECT m.especificacao FROM etec_tombo t
+                                    INNER JOIN etec_materiais_permanentes m ON m.id_permanente = t.id_material
+                                    WHERE t.numero_tombo = ".$rowtombos[$j];
+                        $resultombo = $conn->query($sqltombo);            
+                        $rowtombo = mysqli_fetch_array($resultombo);
+                        echo   '<li>'.$rowtombo['especificacao'].'</li>';
+                    }else{
+                        break;
+                    }
+                }
+                echo '</ul>
+                    </td>';
+            ?>
+        </tr>
+    </table>
+    <br>
+    <table>
     <tr>
         <th>
             <?php 
                 if($row['stats'] != "ENTREGUE"){
                     echo '<form action="editar_guia.php" method="POST">
                             <input type="hidden" name="idGuia" value="'.$guiaID.'">
-                            <input type="hidden" name="tipo" value="'.$tipo.'">
                             <input type="submit" value="Editar" value="Editar">
                         </form>';
-                }else{
-
-                }
-            
+                }            
             ?>
             
         </th>
