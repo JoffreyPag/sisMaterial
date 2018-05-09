@@ -82,11 +82,6 @@
                         <button type="submit" value="'.$row['numero_tombo'].'" name="Excluir">Excluir</button>
                     </form>
                 </td>
-                <td>
-                    <form action="Guia_transito/transferencia.php" method="post">
-                        <button type="submit" value="'.$row['numero_tombo'].'" name="mover">Realizar mudança</button>
-                    </form>
-                </td>
                 </tr>';
             }
         ?>

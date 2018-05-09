@@ -17,10 +17,10 @@ include_once("../conexao.php");
     <title>Tranferencia</title>
 </head>
 <body>
-    <form action="../controle/processo_guia.php" method="post">
+    <form action="../controle/controle_transferencia.php" method="post">
         <input type="hidden" name="setorOrigem" value="<?=$row['id_departamento']?>">
         <input type="hidden" name="ntombo" value="<?=$row['numero_tombo']?>">
-        <input type="hidden" name="idMaterial" value="<?=$row['id_material']?>">
+        <!--<input type="hidden" name="idMaterial" value="<X=$row['id_material']?>">-->
         <table border=1>
             <tr>
                 <th>Setor de origem: </th>
@@ -31,11 +31,11 @@ include_once("../conexao.php");
                 <td>
                     <?php
                         $sqlSetor = "SELECT d.id_departamento, d.nome, p.municipio, p.cidade FROM etec_departamento d
-                        INNER JOIN etec_polo p ON d.idpolo = p.idpolo";
+                                    INNER JOIN etec_polo p ON d.idpolo = p.idpolo";
                         $resultDestino = $conn->query($sqlSetor);
                         echo '<select name="setorDestino">';
                         while($row2 = mysqli_fetch_array($resultDestino)){
-                            //para evitar que alguem tente mandar um intem de um setor para o mesmo setor
+                            //para evitar que alguem tente mandar um item de um setor para o mesmo setor
                             if($row2['id_departamento'] != $row['id_departamento']){
                                 echo '<option value="'.$row2['id_departamento'].'">'.$row2['municipio'].'/'.$row2['cidade'].'-'.$row2['nome'].'</option>';
                             }
@@ -46,12 +46,21 @@ include_once("../conexao.php");
             </tr>
             <tr>
                 <th>Responsável:</th>
-                <td><input type="text" name="resp"></td>
+                <td><input type="text" name="resp" size="100"></td>
             </tr>
             <tr>
                 <th>Justificativa:</th>
-                <td><textarea name="just" cols="70" rows="10"></textarea></td>
+                <td><textarea name="just" cols="75" rows="10"></textarea></td>
             </tr>
+            <tr>
+                <th><label for="ent">Entregador: </label></th>
+                <td><input type="text" name="entregador" id="ent" size="100"></td>
+            </tr>
+            <tr>   
+                <th><label for="dest">Destinatario:</label></th>
+                <td><input type="text" name="destinatario" id="dest" size="100"></td>
+            </tr>   
+            
         </table>    
         <table border=1>
             <tr>
@@ -66,7 +75,7 @@ include_once("../conexao.php");
             </tr>
         </table>
         <br>
-        <input type="submit" name ="Movimentar" value="Movimentar">
+        <input type="submit" value="Movimentar">
     </form>
 </body>
 </html>

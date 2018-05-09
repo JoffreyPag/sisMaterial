@@ -76,7 +76,13 @@ include_once("conexao.php");
             <td>'.$row['numero_tombo'].'</td>
             <td>'.$row['numero_serie'].'</td>
             <td>'.$row['especificacao'].'</td>
-            <td>'.$row['nome'].'</td></tr>';
+            <td>'.$row['nome'].'</td>
+            <td>
+                <form action="Guia_transito/transferencia.php" method="post">
+                    <button type="submit" value="'.$row['numero_tombo'].'" name="mover">Realizar mudança</button>
+                </form>
+            </td>
+            </tr>';
         }
         echo'</table>';
     }else{

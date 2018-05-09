@@ -77,7 +77,27 @@ CREATE TABLE numero_tombos(
 	t18 VARCHAR(20),
 	t19 VARCHAR(20),
 	t20 VARCHAR(20),
-	PRIMARY KEY(id_tombos)
+	PRIMARY KEY(id_tombos),
+	FOREIGN KEY(t1) REFERENCES etec_tombo(numero_tombo),
+	FOREIGN KEY(t2) REFERENCES etec_tombo(numero_tombo),
+	FOREIGN KEY(t3) REFERENCES etec_tombo(numero_tombo),
+	FOREIGN KEY(t4) REFERENCES etec_tombo(numero_tombo),
+	FOREIGN KEY(t5) REFERENCES etec_tombo(numero_tombo),
+	FOREIGN KEY(t6) REFERENCES etec_tombo(numero_tombo),
+	FOREIGN KEY(t7) REFERENCES etec_tombo(numero_tombo),
+	FOREIGN KEY(t8) REFERENCES etec_tombo(numero_tombo),
+	FOREIGN KEY(t9) REFERENCES etec_tombo(numero_tombo),
+	FOREIGN KEY(t10) REFERENCES etec_tombo(numero_tombo),
+	FOREIGN KEY(t11) REFERENCES etec_tombo(numero_tombo),
+	FOREIGN KEY(t12) REFERENCES etec_tombo(numero_tombo),
+	FOREIGN KEY(t13) REFERENCES etec_tombo(numero_tombo),
+	FOREIGN KEY(t14) REFERENCES etec_tombo(numero_tombo),
+	FOREIGN KEY(t15) REFERENCES etec_tombo(numero_tombo),
+	FOREIGN KEY(t16) REFERENCES etec_tombo(numero_tombo),
+	FOREIGN KEY(t17) REFERENCES etec_tombo(numero_tombo),
+	FOREIGN KEY(t18) REFERENCES etec_tombo(numero_tombo),
+	FOREIGN KEY(t19) REFERENCES etec_tombo(numero_tombo),
+	FOREIGN KEY(t20) REFERENCES etec_tombo(numero_tombo)
 );
 
 CREATE TABLE etec_guias_lab (
