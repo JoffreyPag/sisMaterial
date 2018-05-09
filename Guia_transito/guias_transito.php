@@ -23,12 +23,12 @@ $resultguias = $conn->query($sqlguias);
     <a href="../index.php">Voltar</a>
     <a href="novoGuia1.php"><input type="button" value="Gerar novo guia"></a>
     <form action="guias_transito.php" method="POST">
-            <select name="filtro">
-                <option value="ENTREGUE">ENTREGUE</option>
-                <option value="ESPERANDO">ESPERANDO</option>      
-            </select>
-            <input type="submit" value="Pesquisar">
-        </form>
+        <select name="filtro">
+            <option value="ENTREGUE">ENTREGUE</option>
+            <option value="ESPERANDO">ESPERANDO</option>      
+        </select>
+        <input type="submit" value="Pesquisar">
+    </form>
     <h3>Guias cadastrados</h3>
     <table border=1>
         <tr>
@@ -46,7 +46,6 @@ $resultguias = $conn->query($sqlguias);
                         <td>'.$row['dia'].'/'.$row['mes'].'/'.$row['ano'].'</td>
                         <td>
                             <form action="guia.php" method="POST">
-                                <input type="hidden" name="tipo" value="consumo">
                                 <button type="submit" value="'.$row['id_guia'].'" name="guia">Ver mais</button>
                             </form>
                         </td>

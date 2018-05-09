@@ -1,8 +1,7 @@
 <?php
 include_once("../conexao.php");
-//$id = $_POST['idGuia'];
-$id = 1;
-$sql = "SELECT g.stats, g.entregador, g.destinatario, id_tombos FROM etec_guias_lab g 
+$id = $_POST['idGuia'];
+$sql = "SELECT stats, entregador, destinatario, id_tombos, id_destino FROM etec_guias_lab g 
         WHERE id_guia = $id";
 $result = $conn->query($sql);
 $row = mysqli_fetch_array($result);
@@ -15,7 +14,7 @@ $row = mysqli_fetch_array($result);
     <title>Editar Guia</title>
 </head>
 <body>
-    <form action="../controle/processo_guia.php" method="post">
+    <form action="../controle/processoGuia.php" method="post">
         <table border = 1>
             <tr>
                 <th>Status</th>
@@ -37,6 +36,8 @@ $row = mysqli_fetch_array($result);
                 ?>
             </tr>
         </table>
+        <input type="hidden" name="tombos" value="<?=$row['id_tombos']?>">
+        <input type="hidden" name="destino" value="<?=$row['id_destino']?>">
         <input type="hidden" name="Atualizar" value="<?=$id?>">
         <input type="submit" value="Atualizar">
     </form>

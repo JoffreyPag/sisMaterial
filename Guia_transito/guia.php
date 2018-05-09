@@ -1,7 +1,7 @@
 <?php
 include_once("../conexao.php");
-//$guiaID  = $_POST['guia'];
-$guiaID  = 1;
+$guiaID  = $_POST['guia'];
+
 $sql = "SELECT pd.municipio, pd.cidade, dd.nome, dor.nome, 
                 g.responsavel, g.justificativa, g.entregador, g.destinatario, 
                 g.dia, g.mes, g.ano, g.stats, g.id_tombos 
@@ -10,6 +10,7 @@ $sql = "SELECT pd.municipio, pd.cidade, dd.nome, dor.nome,
         LEFT OUTER JOIN etec_departamento dd ON g.id_destino = dd.id_departamento 
         LEFT OUTER JOIN etec_polo pd ON dd.idpolo = pd.idpolo 
         WHERE g.id_guia = $guiaID";
+
 $result = $conn->query($sql);
 $row = mysqli_fetch_array($result);
 
@@ -105,9 +106,9 @@ $rowtombos = mysqli_fetch_array($resultombos);
             
         </th>
         <th>
-            <form action="../controle/processo_guia.php" method="POST">
+            <form action="../controle/processoGuia.php" method="POST">
+                <input type="hidden" name="tombos" value="<?=$row['id_tombos']?>">
                 <input type="hidden" name="idguia" value="<?=$guiaID?>">
-                <!--EDITAR AQUI -->
                 <input type="submit" name="Excluir" value="Excluir">
             </form>
         </th>

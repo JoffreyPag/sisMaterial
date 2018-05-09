@@ -54,16 +54,39 @@ CREATE TABLE etec_tombo(
 );
 
 /*GUIA DE TRANSITO*/
-CREATE TABLE etec_guias(
+
+CREATE TABLE numero_tombos(
+	id_tombos int not null AUTO_INCREMENT,
+	t1 VARCHAR(20),
+	t2 VARCHAR(20),
+	t3 VARCHAR(20),
+	t4 VARCHAR(20),
+	t5 VARCHAR(20),
+	t6 VARCHAR(20),
+	t7 VARCHAR(20),
+	t8 VARCHAR(20),
+	t9 VARCHAR(20),
+	t10 VARCHAR(20),
+	t11 VARCHAR(20),
+	t12 VARCHAR(20),
+	t13 VARCHAR(20),
+	t14 VARCHAR(20),
+	t15 VARCHAR(20),
+	t16 VARCHAR(20),
+	t17 VARCHAR(20),
+	t18 VARCHAR(20),
+	t19 VARCHAR(20),
+	t20 VARCHAR(20),
+	PRIMARY KEY(id_tombos)
+);
+
+CREATE TABLE etec_guias_lab (
 	id_guia int not null AUTO_INCREMENT,
+	id_tombos int,
 	id_origem int,
 	id_destino int,
-	id_material int,
-	isConsumo BOOLEAN,
 	responsavel VARCHAR(50),
 	justificativa TEXT,
-	numero_tombo VARCHAR(20),
-	quantidade int,
 	entregador VARCHAR(50),
 	destinatario VARCHAR(50),
 	dia int,
@@ -73,7 +96,7 @@ CREATE TABLE etec_guias(
 	PRIMARY KEY(id_guia),
 	FOREIGN KEY(id_origem) REFERENCES etec_departamento(id_departamento),
 	FOREIGN KEY(id_destino) REFERENCES etec_departamento(id_departamento),
-	FOREIGN KEY(numero_tombo) REFERENCES etec_tombo(numero_tombo)
+	FOREIGN KEY(id_tombos) REFERENCES numero_tombos(id_tombos)
 );
 
  INSERT INTO etec_polo (idpolo, municipio, cidade, bairro, logradouro, numero, cep, telefone, shortname, ativo) VALUES
@@ -139,70 +162,3 @@ INSERT INTO etec_tombo VALUES
 ("2015007525", "BRJ451GTH6", 1, 1),
 ("2015007527", "BRJ446BZNP", 1, 1),
 ("2015007541", "BRJ451GTGT", 1, 1);
-
-INSERT INTO etec_guias (id_guia, id_origem, id_destino, id_material, isConsumo, responsavel, justificativa, numero_tombo, quantidade, entregador, destinatario, dia, mes, ano, stats) VALUES
-(1, 7, 1, 1, 1, 'Joffrey', 'Precisa', null, 70, 'João', 'Maria', day(CURRENT_DATE), month(CURRENT_DATE), year(CURRENT_DATE), 'ESPERANDO'),
-(2, 7, 2, 2, 1, 'Joffrey', 'Precisa tambem', null, 70, 'Jean', 'Mario', day(CURRENT_DATE), month(CURRENT_DATE), year(CURRENT_DATE), 'ESPERANDO');
-
-/*EXPERIMENTO*/
-CREATE TABLE etec_guias_lab (
-	id_guia int not null AUTO_INCREMENT,
-	id_tombos int,
-	id_origem int,
-	id_destino int,
-	responsavel VARCHAR(50),
-	justificativa TEXT,
-	entregador VARCHAR(50),
-	destinatario VARCHAR(50),
-	dia int,
-	mes int,
-	ano int,
-	stats VARCHAR(12),
-	PRIMARY KEY(id_guia),
-	FOREIGN KEY(id_origem) REFERENCES etec_departamento(id_departamento),
-	FOREIGN KEY(id_destino) REFERENCES etec_departamento(id_departamento),
-	FOREIGN KEY(id_tombos) REFERENCES numero_tombos(id_tombos)
-);
-
-CREATE TABLE numero_tombos(
-	id_tombos int not null AUTO_INCREMENT,
-	t1 VARCHAR(20),
-	t2 VARCHAR(20),
-	t3 VARCHAR(20),
-	t4 VARCHAR(20),
-	t5 VARCHAR(20),
-	t6 VARCHAR(20),
-	t7 VARCHAR(20),
-	t8 VARCHAR(20),
-	t9 VARCHAR(20),
-	t10 VARCHAR(20),
-	t11 VARCHAR(20),
-	t12 VARCHAR(20),
-	t13 VARCHAR(20),
-	t14 VARCHAR(20),
-	t15 VARCHAR(20),
-	t16 VARCHAR(20),
-	t17 VARCHAR(20),
-	t18 VARCHAR(20),
-	t19 VARCHAR(20),
-	t20 VARCHAR(20),
-	PRIMARY KEY(id_tombos)
-);
-
-/*
-DROP PROCEDURE IF EXISTS `createTableProcTest`;
-CREATE PROCEDURE `createTableProcTest`()
-BEGIN
-    DECLARE count INT Default 0;
-      simple_loop: LOOP
-         SET @a := count + 1;
-         SET @statement = CONCAT('Create table Table',@a,' ( name VARCHAR(70), age int );');
-         PREPARE stmt FROM @statement;
-                 EXECUTE stmt;
-                 DEALLOCATE PREPARE stmt;
-                 SET count = count + 1;
-         IF count=100 THEN
-            LEAVE simple_loop;
-         END IF;
-END LOOP simple_loop;
-END//*/

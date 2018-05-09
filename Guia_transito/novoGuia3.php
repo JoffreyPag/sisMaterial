@@ -15,7 +15,7 @@ $iddp = $_POST['departamento'];
     <title>Novo guia - Finalizar pedido</title>
 </head>
 <body>
-    <form action="../Guia_teste/processoGuia.php" method="post">
+    <form action="../controle/processoGuia.php" method="post">
         <table border=1>
             <tr>
                 <th>Setor de origem:</th>

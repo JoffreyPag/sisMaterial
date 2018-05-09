@@ -58,7 +58,8 @@ $result = $conn->query($sql);
 if($result){
     header("Location: ../index.php");
 }else{
-    echo 'falha';
+    //echo 'falha';
+    header("Location: ../ErroAdvice.html");
 }
 
 ?>

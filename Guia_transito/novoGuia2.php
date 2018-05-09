@@ -79,9 +79,9 @@ $(document).ready(function () {
                             <td><p>Indisponivel</h4></p>
                         </tr>';
                 }
-                echo '</table><br/>';
+                echo '</table>';
             }
-            echo '<input type="submit" value="Continuar" id="checkBtn">
+            echo '<br/><input type="submit" value="Continuar" id="checkBtn">
             </form>';
 
         }else{

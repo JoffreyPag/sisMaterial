@@ -23,7 +23,8 @@ if(isset($_POST['Excluir'])){
         //echo 'sucesso';
         header("Location: ../index.php");
     }else{
-        echo 'falha';
+        //echo 'falha';
+        header("Location: ../ErroAdvice.html");
     }
 
 ?>
