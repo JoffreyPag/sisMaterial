@@ -25,8 +25,8 @@ $row = mysqli_fetch_array($result);
                 <td>
                     <?php
                         echo '<select name="estado">
-                                    <option value="ENTREGUE">ENTREGUE</option>
-                                    <option value="ESPERANDO">ESPERANDO</option>      
+                                    <option value="ESPERANDO">ESPERANDO</option>
+                                    <option value="ENTREGUE">ENTREGUE</option>      
                                 </select>';
                     ?>
                 </td>

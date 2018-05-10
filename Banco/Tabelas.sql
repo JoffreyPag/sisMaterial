@@ -119,6 +119,64 @@ CREATE TABLE etec_guias_lab (
 	FOREIGN KEY(id_tombos) REFERENCES numero_tombos(id_tombos)
 );
 
+CREATE TABLE tabela_consumos(
+	id_consumos int not null AUTO_INCREMENT,
+	c1 VARCHAR(20),
+	c2 VARCHAR(20),
+	c3 VARCHAR(20),
+	c4 VARCHAR(20),
+	c5 VARCHAR(20),
+	c6 VARCHAR(20),
+	c7 VARCHAR(20),
+	c8 VARCHAR(20),
+	c9 VARCHAR(20),
+	c10 VARCHAR(20),
+	c11 VARCHAR(20),
+	c12 VARCHAR(20),
+	c13 VARCHAR(20),
+	c14 VARCHAR(20),
+	c15 VARCHAR(20),
+	c16 VARCHAR(20),
+	c17 VARCHAR(20),
+	c18 VARCHAR(20),
+	c19 VARCHAR(20),
+	c20 VARCHAR(20),
+	PRIMARY KEY(id_consumos),
+	FOREIGN KEY(c1) REFERENCES etec_materiais_consumo(id_consumo),
+	FOREIGN KEY(c2) REFERENCES etec_materiais_consumo(id_consumo),
+	FOREIGN KEY(c3) REFERENCES etec_materiais_consumo(id_consumo),
+	FOREIGN KEY(c4) REFERENCES etec_materiais_consumo(id_consumo),
+	FOREIGN KEY(c5) REFERENCES etec_materiais_consumo(id_consumo),
+	FOREIGN KEY(c6) REFERENCES etec_materiais_consumo(id_consumo),
+	FOREIGN KEY(c7) REFERENCES etec_materiais_consumo(id_consumo),
+	FOREIGN KEY(c8) REFERENCES etec_materiais_consumo(id_consumo),
+	FOREIGN KEY(c9) REFERENCES etec_materiais_consumo(id_consumo),
+	FOREIGN KEY(c10) REFERENCES etec_materiais_consumo(id_consumo),
+	FOREIGN KEY(c11) REFERENCES etec_materiais_consumo(id_consumo),
+	FOREIGN KEY(c12) REFERENCES etec_materiais_consumo(id_consumo),
+	FOREIGN KEY(c13) REFERENCES etec_materiais_consumo(id_consumo),
+	FOREIGN KEY(c14) REFERENCES etec_materiais_consumo(id_consumo),
+	FOREIGN KEY(c15) REFERENCES etec_materiais_consumo(id_consumo),
+	FOREIGN KEY(c16) REFERENCES etec_materiais_consumo(id_consumo),
+	FOREIGN KEY(c17) REFERENCES etec_materiais_consumo(id_consumo),
+	FOREIGN KEY(c18) REFERENCES etec_materiais_consumo(id_consumo),
+	FOREIGN KEY(c19) REFERENCES etec_materiais_consumo(id_consumo),
+	FOREIGN KEY(c20) REFERENCES etec_materiais_consumo(id_consumo)
+);
+
+CREATE TABLE etec_requisicao_consumo(
+	id_requisicao int not null AUTO_INCREMENT,
+	id_consumos int,
+	id_destino int,
+	unidade VARCHAR(10),
+	solicitante VARCHAR(50),
+	autorizado VARCHAR(50),
+	receptor VARCHAR(50),
+	PRIMARY KEY(id_requisicao),
+	FOREIGN KEY(id_consumos) REFERENCES tabelas_consumos(id_consumos),
+	FOREIGN KEY(id_destino) REFERENCES etec_departamento(id_departamento)
+);
+
  INSERT INTO etec_polo (idpolo, municipio, cidade, bairro, logradouro, numero, cep, telefone, shortname, ativo) VALUES
 (1, 'Macaíba', 'Macaíba', '', '1', '', '', '', 'MACA', 1),
 (2, 'Natal', 'Natal', '', '2', '', '', '', 'NATL', 1),

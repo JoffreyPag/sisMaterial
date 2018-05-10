@@ -15,8 +15,23 @@ $result = $conn->query($sql);
 <head>
     <meta charset="UTF-8">
     <title>Novo Guia - Selecionar material</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
 </head>
 <body>
+<script type="text/javascript">
+$(document).ready(function () {
+    $('#checkBtn').click(function() {
+      checked = $("input[type=checkbox]:checked").length;
+
+      if(!checked) {
+        alert("Você deve escolher ao menos um item para continuar.");
+        return false;
+      }
+
+    });
+});
+
+</script>
 <a href="../Guia_transito/guias_transito.php">Voltar</a>
     <form action="novoGuia2.php" method="post">
         <table>
@@ -40,7 +55,7 @@ $result = $conn->query($sql);
             }
         ?>
         </table>
-        <input type="submit" value="Confirmar">
+        <input type="submit" value="Confirmar" id="checkBtn">
     </form>
 </body>
 </html>

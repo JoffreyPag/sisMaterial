@@ -18,6 +18,7 @@
     <a href="Guia_transito/guias_transito.php"><input type="button" value="Guias de transito"></a>
     <a href="tombos.php"><input type="button" value="Tombos"></a>
     <a href="cadastrar_material.php"><input type="button" value="Cadastrar material"></a>
+    <a href="Materiais_consumo/"><input type="button" value="Requisição de materiais"></a>
     <h3>Materiais Permanentes cadastrados</h3>
     <table border=1>
         <tr>
