@@ -58,10 +58,10 @@ $materials = $_POST['materiais'];
                                     <td colspan=3>'.$dtl[1].'</td>
                                     <td>
                                         <input type="hidden" name="ids[]" value="'.$dtl[0].'">
-                                        <input type="text" name="unidade" required>
+                                        '.$dtl[3].'
                                     </td>
                                     <td>'.$dtl[2].'</td>
-                                    <td><input type="number" name="qtd" value="1" min="0" max="'.$dtl[2].'"></td>
+                                    <td><input type="number" name="qtds[]" value="1" min="0" max="'.$dtl[2].'"></td>
                                 </tr>';
                         $n++;
                     }

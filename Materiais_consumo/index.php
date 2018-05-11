@@ -1,6 +1,6 @@
 <?php
 include_once("../conexao.php");
-$sql = "SELECT c.id_consumo, c.especificacao, c.quantidade, c.id_departamento, d.nome, p.cidade FROM etec_materiais_consumo c 
+$sql = "SELECT c.id_consumo, c.especificacao, c.quantidade, c.id_departamento, c.unidade, d.nome, p.cidade FROM etec_materiais_consumo c 
         INNER JOIN etec_departamento d ON c.id_departamento = d.id_departamento 
         INNER JOIN etec_polo p ON d.idpolo = p.idpolo";
 
@@ -48,7 +48,7 @@ $result = $conn->query($sql);
                             <td>'.(($row['quantidade'] <= 0)? 'Esgotado' : $row['quantidade']).'</td>
                             <td>'.$row['cidade'].'/'.$row['nome'].'</td>
                             <td>
-                                '.(($row['quantidade']<=0)? '' : '<input type="checkbox" name="materiais[]" value="'.$row['id_consumo'].':'.$row['especificacao'].':'.$row['quantidade'].'">').'
+                                '.(($row['quantidade']<=0)? '' : '<input type="checkbox" name="materiais[]" value="'.$row['id_consumo'].':'.$row['especificacao'].':'.$row['quantidade'].':'.$row['unidade'].'">').'
                             </td>
                         </tr>';
                 }
