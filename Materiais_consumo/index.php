@@ -33,6 +33,7 @@ $result = $conn->query($sql);
     </script>
     <h3>Requisição interna de material de consumo</h3>
     <a href="../index.php">Voltar</a>
+    <a href="listar_requisicoes.php"><input type="button" value="Listar requisições"></a>
     <br><br>
     <form action="Documento_requisicao.php" method="post">
         <table border =1 >

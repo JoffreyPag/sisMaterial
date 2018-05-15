@@ -1,6 +1,5 @@
 <?php
  include_once("conexao.php");
- include_once("Modelo/Permanente.php");
  $sqlPermanente = "SELECT id_permanente, especificacao, acessorio FROM etec_materiais_permanentes";
  $sqlConsumo = "SELECT m.id_consumo, m.quantidade, m.especificacao , d.nome FROM etec_materiais_consumo m
                 INNER JOIN etec_departamento d WHERE m.id_departamento = d.id_departamento";

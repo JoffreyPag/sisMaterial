@@ -1,6 +1,6 @@
 <?php
 include_once("../conexao.php");
-$sql = "SELECT d.nome, p.municipio, p.cidade  FROM etec_departamento d 
+$sql = "SELECT d.nome, p.municipio, p.cidade, d.id_departamento  FROM etec_departamento d 
         INNER JOIN etec_polo p ON d.idpolo = p.idpolo";
 
 $result = $conn->query($sql);
@@ -16,7 +16,7 @@ $materials = $_POST['materiais'];
     <title>Documento</title>
 </head>
 <body>
-    <form action="" method="post">
+    <form action="../controle/processoConsumo.php" method="post">
         <table border =1>
             <tr>
                 <th colspan=7>Requisição Interna de Material</th>
@@ -78,7 +78,7 @@ $materials = $_POST['materiais'];
             </tr>
         </table>
         <br>
-        <input type="submit" value="Confirmar">
+        <input type="submit" value="Confirmar" name="Solicitar">
     </form>
 </body>
 </html>
