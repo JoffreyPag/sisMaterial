@@ -1,5 +1,6 @@
 <?php
 include_once("../conexao.php");
+
 //setorDestino, ids[], qtds[], solicitado, autorizado, recebido
 if(isset($_POST['Solicitar'])){
 
@@ -42,17 +43,27 @@ if(isset($_POST['Solicitar'])){
 else if(isset($_POST['Atualizar'])){
 
 }else if(isset($_POST['Excluir'])){
-    
-}else{
 
-}
+    $requisicao = $_POST['idreq'];
+    $tabela = $_POST['idtabela'];
+
+    $sql = "DELETE FROM etec_requisicao_consumo WHERE id_requisicao = $requisicao";
+    $res1 = $conn->query($sql);
+    if($res1){
+        $sql = "DELETE FROM tabela_consumos WHERE id_consumos = $tabela";
+        $res2 = $conn->query($sql);
+        redirecionar($res2);
+    }else{
+        redirecionar($res1);
+    }
+}else{}
 
 function redirecionar($bol){
     if($bol){
-        header("Location: ../");
+        header("Location: ../Materiais_consumo");
     }else{
-        //echo 'error';
-        header("Location: ../ErroAdvice.html");
+        echo 'error';
+        //header("Location: ../ErroAdvice.html");
     }
 }
 ?>

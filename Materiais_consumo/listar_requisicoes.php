@@ -15,6 +15,7 @@ $result = $conn->query($sql);
     <title>Lista de requisições</title>
 </head>
 <body>
+<a href="index.php">Voltar</a>
     <form action="listar_requisicoes.php" method="POST">
         <select name="filtro">
             <option value="ENTREGUE">ENTREGUE</option>

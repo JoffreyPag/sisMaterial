@@ -24,6 +24,7 @@ $rowconsumos = mysqli_fetch_array($result2);
     <title>Requisição</title>
 </head>
 <body>
+    <a href="listar_requisicoes.php">Voltar</a>
     <table border=1>
         <tr><th colspan=4>Material Requisitado</th></tr>
         <tr>
@@ -53,7 +54,15 @@ $rowconsumos = mysqli_fetch_array($result2);
         ?>
     </table>
     <br>
-    <form action=""><input type="submit" value="Editar"></form>
-    <form action=""><input type="submit" value="Excluir"></form>
+    <form action="" method="post">
+        <input type="hidden" name="idreq" value="<?=$row['id_requisicao']?>">
+        <input type="hidden" name="idtabela" value="<?=$row['id_conusmos']?>">
+        <input type="submit" value="Editar">
+    </form>
+    <form action="../controle/processoConsumo.php" method="post">
+        <input type="hidden" name="idreq" value="<?=$row['id_requisicao']?>">
+        <input type="hidden" name="idtabela" value="<?=$row['id_consumos']?>">
+        <input type="submit" value="Excluir" name="Excluir">    
+    </form>
 </body>
 </html>
