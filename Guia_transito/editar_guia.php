@@ -23,12 +23,11 @@ $row = mysqli_fetch_array($result);
             </tr>
             <tr>
                 <td>
-                    <?php
-                        echo '<select name="estado">
-                                    <option value="ESPERANDO">ESPERANDO</option>
-                                    <option value="ENTREGUE">ENTREGUE</option>      
-                                </select>';
-                    ?>
+                    <select name="estado">
+                        <option value="ESPERANDO">ESPERANDO</option>
+                        <option value="ENTREGUE">ENTREGUE</option>      
+                    </select>
+                    
                 </td>
                 <?php
                     echo '<td> <input type="text" name="entregador" value="'.$row['entregador'].'"></td>

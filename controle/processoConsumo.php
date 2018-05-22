@@ -41,8 +41,31 @@ if(isset($_POST['Solicitar'])){
     }
 }
 else if(isset($_POST['Atualizar'])){
-
-}else if(isset($_POST['Excluir'])){
+    $id = $_POST['idreq'];
+    $ids = $_POST['ids'];
+    $qtds = $_POST['qtds'];
+    $solicitante = $_POST['solicitante'];
+    $autorizado = $_POST['autorizado'];
+    $receptor = $_POST['receptor'];
+    $estado = $_POST['estado'];
+    $sql = "UPDATE etec_requisicao_consumo 
+            SET stats = '$estado', solicitante = '$solicitante', autorizado = '$autorizado', receptor = '$receptor' 
+            WHERE id_requisicao = $id";
+    $result = $conn->query($sql);
+    if($estado == "ENTREGUE" && $result){
+        for ($i=0; $i < count($qtds); $i++) { 
+            $sqlzinho = "UPDATE etec_materiais_consumo 
+                        SET quantidade = quantidade - ".$qtds[$i]." 
+                        WHERE id_consumo = ".$ids[$i];
+            $r = $conn->query($sqlzinho);
+            if(!$r){
+                redirecionar($r);
+            }
+        }
+    }
+    redirecionar($result);
+}
+else if(isset($_POST['Excluir'])){
 
     $requisicao = $_POST['idreq'];
     $tabela = $_POST['idtabela'];
@@ -56,7 +79,8 @@ else if(isset($_POST['Atualizar'])){
     }else{
         redirecionar($res1);
     }
-}else{}
+}
+else{}
 
 function redirecionar($bol){
     if($bol){

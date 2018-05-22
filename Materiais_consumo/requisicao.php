@@ -26,7 +26,9 @@ $rowconsumos = mysqli_fetch_array($result2);
 <body>
     <a href="listar_requisicoes.php">Voltar</a>
     <table border=1>
-        <tr><th colspan=4>Material Requisitado</th></tr>
+        <tr>
+        <td><?= $row['stats']?></td>
+        <th colspan=3>Material Requisitado</th></tr>
         <tr>
             <th>Unidade requisitante:</th>
             <td><?php echo $row['municipio'].'/'.$row['cidade'].'-'.$row['nome'];?></td>
@@ -52,11 +54,21 @@ $rowconsumos = mysqli_fetch_array($result2);
                 }else{break;}
             }
         ?>
+        <tr>
+                <th>Solicitado por:</th>
+                <th>Autorizado por:</th>
+                <th colspan=2><label for="rec">Recebido por:</label></th>
+            </tr>
+            <tr>
+                <td><?= $row['solicitante']?></td>
+                <td><?= $row['autorizado']?></td>
+                <td colspan=2><?= $row['receptor']?></td>
+            </tr>
     </table>
     <br>
-    <form action="" method="post">
+    <form action="Editar_requisicao.php" method="post">
         <input type="hidden" name="idreq" value="<?=$row['id_requisicao']?>">
-        <input type="hidden" name="idtabela" value="<?=$row['id_conusmos']?>">
+        <input type="hidden" name="idtabela" value="<?=$row['id_consumos']?>">
         <input type="submit" value="Editar">
     </form>
     <form action="../controle/processoConsumo.php" method="post">
