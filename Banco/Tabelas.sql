@@ -110,6 +110,7 @@ CREATE TABLE etec_guias_lab (
 	justificativa TEXT,
 	entregador VARCHAR(50),
 	destinatario VARCHAR(50),
+	autorizador VARCHAR(50),
 	dia int,
 	mes int,
 	ano int,

@@ -27,6 +27,11 @@ $rowtombos = mysqli_fetch_array($resultombos);
 </head>
 <body>
     <a href="guias_transito.php">Voltar</a>
+    <form action="../PDF/gerarguia.php" method="post">
+        <input type="hidden" name="tombos" value="<?=$row['id_tombos']?>">
+        <input type="hidden" name="idguia" value="<?=$guiaID?>">
+        <input type="submit" value="Gerar Documento PDF">
+    </form>
     <table border=1>
         <tr>
             <th>Status</th>
