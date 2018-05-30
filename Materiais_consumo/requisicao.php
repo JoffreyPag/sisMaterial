@@ -25,6 +25,11 @@ $rowconsumos = mysqli_fetch_array($result2);
 </head>
 <body>
     <a href="listar_requisicoes.php">Voltar</a>
+    <form action="../PDF/gerarSolicitacaoMaterial.php" method="post">
+        <input type="hidden" name="consumos" value="<?=$rowconsumos['id_consumos']?>">
+        <input type="hidden" name="id" value="<?=$id?>">
+        <input type="submit" value="Gerar Documento PDF">
+    </form>
     <table border=1>
         <tr>
         <td><?= $row['stats']?></td>
