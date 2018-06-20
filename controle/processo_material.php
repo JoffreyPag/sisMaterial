@@ -37,9 +37,11 @@ if(isset($_POST['tipoMaterial'])){
 
                 $espec = $_POST["Especificacao"];
                 $qtd = $_POST["quantidade"];
+                $unidade = $_POST["unidade"];
+                $local = $_POST["local"];
 
                 if(isset($_POST['Cadastrar'])){
-                    $sql = "INSERT INTO etec_materiais_consumo(quantidade, especificacao, id_departamento) VALUES('$qtd','$espec', 7)";
+                    $sql = "INSERT INTO etec_materiais_consumo(quantidade, especificacao, unidade, id_departamento) VALUES('$qtd', '$espec', '$unidade', $local)";
                 }elseif(isset($_POST['Atualizar'])){
 
                     $id = $_POST['Atualizar'];

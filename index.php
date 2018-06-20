@@ -18,6 +18,7 @@
     <a href="tombos.php"><input type="button" value="Tombos"></a>
     <a href="cadastrar_material.php"><input type="button" value="Cadastrar material"></a>
     <a href="Materiais_consumo/"><input type="button" value="Requisição de materiais"></a>
+    <a href="Estoques/"><input type="button" value="Estoques"></a>
     <h3>Materiais Permanentes cadastrados</h3>
     <table border=1>
         <tr>
