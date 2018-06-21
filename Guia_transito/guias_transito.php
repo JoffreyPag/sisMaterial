@@ -5,7 +5,7 @@ $sqlguias = "SELECT g.id_tombos, g.id_origem, g.id_destino, g.stats, g.dia, g.me
             FROM etec_guias_lab g 
             INNER JOIN etec_departamento dor ON g.id_origem = dor.id_departamento 
             INNER JOIN etec_departamento dd ON g.id_destino = dd.id_departamento 
-            INNER JOIN etec_polo pd ON dd.idpolo = pd.idpolo".
+            INNER JOIN adm_mand_polo pd ON dd.idpolo = pd.idpolo".
             (isset($_POST['filtro'])?" WHERE g.stats = '".$_POST['filtro']."'":"").
             " ORDER BY id_guia DESC";
 

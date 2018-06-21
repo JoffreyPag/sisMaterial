@@ -19,7 +19,7 @@ include_once("../conexao.php");
             <label for="polo">Polo:</label>
             <select name="local">
                 <?php
-                    $sql = "SELECT cidade, municipio, idpolo FROM etec_polo";
+                    $sql = "SELECT cidade, municipio, idpolo FROM adm_mand_polo";
                     $result = $conn->query($sql);
                     while($row = mysqli_fetch_array($result)){
                         echo ' <option value="'.$row['idpolo'].'">'.$row['municipio'].' - '.$row['cidade'].'</option>';

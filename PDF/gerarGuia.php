@@ -9,8 +9,8 @@ $sql = "SELECT dp.nome, do.nome, po.municipio, po.cidade, pl.municipio, pl.cidad
         FROM etec_guias_lab g 
         INNER JOIN etec_departamento dp ON g.id_origem = dp.id_departamento 
         INNER JOIN etec_departamento do ON g.id_destino = do.id_departamento 
-        INNER JOIN etec_polo po ON dp.idpolo = po.idpolo 
-        INNER JOIN etec_polo pl ON do.idpolo = pl.idpolo 
+        INNER JOIN adm_mand_polo po ON dp.idpolo = po.idpolo 
+        INNER JOIN adm_mand_polo pl ON do.idpolo = pl.idpolo 
         WHERE g.id_guia = $idguia";
 
 $result = $conn->query($sql);

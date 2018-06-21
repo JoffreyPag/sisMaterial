@@ -5,7 +5,7 @@ $sql = "SELECT rc.id_requisicao, rc.id_consumos, rc.solicitante, rc.autorizado, 
                 dp.nome, po.municipio, po.cidade 
         FROM etec_requisicao_consumo rc 
         INNER JOIN etec_departamento dp ON rc.id_destino = dp.id_departamento 
-        INNER JOIN etec_polo po ON po.idpolo = dp.idpolo 
+        INNER JOIN adm_mand_polo po ON po.idpolo = dp.idpolo 
         WHERE id_requisicao = $id";
 $result = $conn->query($sql);
 

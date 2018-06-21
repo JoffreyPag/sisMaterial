@@ -1,7 +1,7 @@
 CREATE DATABASE etec_adm;
 
 /*TABELA POLO*/
-CREATE TABLE etec_polo (
+CREATE TABLE adm_mand_polo (
   idpolo INT NOT NULL AUTO_INCREMENT,
   municipio VARCHAR(45) NOT NULL,
   cidade VARCHAR(45) NOT NULL,
@@ -22,7 +22,7 @@ CREATE TABLE etec_polo (
     idpolo int,
 	isestoque BOOLEAN,
 	PRIMARY KEY(id_departamento),
-	FOREIGN KEY(idpolo) REFERENCES etec_polo(idpolo)
+	FOREIGN KEY(idpolo) REFERENCES adm_mand_polo(idpolo)
 );
 
 /*TABELAs MATERIAIS*/
@@ -202,7 +202,7 @@ CREATE TABLE etec_requisicao_consumo(
 	FOREIGN KEY(id_destino) REFERENCES etec_departamento(id_departamento)
 );
 
- INSERT INTO etec_polo (idpolo, municipio, cidade, bairro, logradouro, numero, cep, telefone, shortname, ativo) VALUES
+ INSERT INTO adm_mand_polo (idpolo, municipio, cidade, bairro, logradouro, numero, cep, telefone, shortname, ativo) VALUES
 (1, 'Macaíba', 'Macaíba', '', '1', '', '', '', 'MACA', 1),
 (2, 'Natal', 'Natal', '', '2', '', '', '', 'NATL', 1),
 (3, 'São Paulo do Potengi', 'São Paulo do Potengi', '', '3', '', '', '', 'SAPP', 1),

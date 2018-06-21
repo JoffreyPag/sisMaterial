@@ -4,7 +4,7 @@ $requisicao = $_POST['idreq'];
 $tabela = $_POST['idtabela'];
 $sqlRequisicao = "SELECT r.solicitante, r.autorizado, r.receptor, r.dia, r.mes, r.ano, r.stats, p.municipio, p.cidade FROM etec_requisicao_consumo r 
                 INNER JOIN etec_departamento dp ON r.id_destino = dp.id_departamento 
-                INNER JOIN etec_polo p ON dp.idpolo = p.idpolo 
+                INNER JOIN adm_mand_polo p ON dp.idpolo = p.idpolo 
                 WHERE r.id_requisicao = $requisicao";
 
 $sqlConsumos = "SELECT * FROM tabela_consumos WHERE id_consumos = $tabela";

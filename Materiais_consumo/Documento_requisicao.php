@@ -1,7 +1,7 @@
 <?php
 include_once("../conexao.php");
 $sql = "SELECT d.nome, p.municipio, p.cidade, d.id_departamento  FROM etec_departamento d 
-        INNER JOIN etec_polo p ON d.idpolo = p.idpolo";
+        INNER JOIN adm_mand_polo p ON d.idpolo = p.idpolo";
 
 $result = $conn->query($sql);
 $materials = $_POST['materiais'];

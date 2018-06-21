@@ -15,7 +15,7 @@ $rowids = mysqli_fetch_array($resultids);
 
 $sql = "SELECT erc.solicitante, erc.autorizado, erc.receptor, erc.dia, erc.mes, erc.ano, erc.stats, dp.nome, po.municipio, po.cidade FROM etec_requisicao_consumo erc 
         INNER JOIN etec_departamento dp ON dp.id_departamento = erc.id_destino 
-        INNER JOIN etec_polo po ON po.idpolo = dp.idpolo 
+        INNER JOIN adm_mand_polo po ON po.idpolo = dp.idpolo 
         WHERE erc.id_requisicao = $id_req";
 $result = $conn->query($sql);
 $row = mysqli_fetch_array($result);

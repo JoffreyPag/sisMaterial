@@ -33,7 +33,7 @@ $(document).ready(function () {
         <select name="estoque" id="">
             <?php
                 $estoquesql = "SELECT d.id_departamento, d.nome, p.municipio, p.cidade FROM etec_departamento d 
-                INNER JOIN etec_polo p ON p.idpolo = d.idpolo 
+                INNER JOIN adm_mand_polo p ON p.idpolo = d.idpolo 
                 WHERE isestoque = true";
                 $estoqueresultado = $conn->query($estoquesql);
                 while($row = mysqli_fetch_array($estoqueresultado)){

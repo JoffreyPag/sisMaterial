@@ -6,15 +6,15 @@
         $sql = "SELECT t.numero_tombo, t.numero_serie, m.especificacao, m.acessorio, d.nome, d.isestoque, p.cidade FROM etec_tombo t 
         LEFT OUTER JOIN etec_materiais_permanentes m ON t.id_material = m.id_permanente 
         LEFT OUTER JOIN etec_departamento d ON d.id_departamento = t.id_departamento 
-        LEFT OUTER JOIN etec_polo p ON d.idpolo = p.idpolo WHERE t.$campo = '$valor'";
+        LEFT OUTER JOIN adm_mand_polo p ON d.idpolo = p.idpolo WHERE t.$campo = '$valor'";
 
     }else{
         $sql = "SELECT t.numero_tombo, t.numero_serie, m.especificacao, m.acessorio, d.nome, d.isestoque, p.cidade FROM etec_tombo t 
         LEFT OUTER JOIN etec_materiais_permanentes m ON t.id_material = m.id_permanente 
         LEFT OUTER JOIN etec_departamento d ON d.id_departamento = t.id_departamento 
-        LEFT OUTER JOIN etec_polo p ON d.idpolo = p.idpolo";
+        LEFT OUTER JOIN adm_mand_polo p ON d.idpolo = p.idpolo";
     }
-    $sqlpolo = "SELECT idpolo, municipio, cidade FROM etec_polo";
+    $sqlpolo = "SELECT idpolo, municipio, cidade FROM adm_mand_polo";
     
 ?>
 

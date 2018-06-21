@@ -2,7 +2,7 @@
 include_once("../conexao.php");
 $sql = "SELECT rc.id_requisicao, rc.solicitante, rc.dia, rc.mes, rc.ano, rc.stats, po.municipio, po.cidade FROM etec_requisicao_consumo rc 
         INNER JOIN etec_departamento dp ON dp.id_departamento = rc.id_destino 
-        INNER JOIN etec_polo po ON po.idpolo = dp.idpolo".(isset($_POST['filtro'])? " WHERE rc.stats = '".$_POST['filtro']."'": "");
+        INNER JOIN adm_mand_polo po ON po.idpolo = dp.idpolo".(isset($_POST['filtro'])? " WHERE rc.stats = '".$_POST['filtro']."'": "");
 $result = $conn->query($sql);
 
 ?>

@@ -8,7 +8,7 @@ $sql = "SELECT pd.municipio, pd.cidade, dd.nome, dor.nome,
         FROM etec_guias_lab g 
         LEFT OUTER JOIN etec_departamento dor ON g.id_origem = dor.id_departamento 
         LEFT OUTER JOIN etec_departamento dd ON g.id_destino = dd.id_departamento 
-        LEFT OUTER JOIN etec_polo pd ON dd.idpolo = pd.idpolo 
+        LEFT OUTER JOIN adm_mand_polo pd ON dd.idpolo = pd.idpolo 
         WHERE g.id_guia = $guiaID";
 
 $result = $conn->query($sql);

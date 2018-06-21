@@ -21,7 +21,7 @@ $iddp = $_POST['departamento'];
                 <th>Setor de origem:</th>
                 <td>
                     <?php 
-                        $setorO = "SELECT p.municipio, p.cidade, d.nome FROM etec_polo p
+                        $setorO = "SELECT p.municipio, p.cidade, d.nome FROM adm_mand_polo p
                                     INNER JOIN etec_departamento d ON d.idpolo = p.idpolo
                                     WHERE d.id_departamento = ".$iddp;
                         $resultSO = $conn->query($setorO);
@@ -37,7 +37,7 @@ $iddp = $_POST['departamento'];
                     <select name="setorDestino">
                         <?php
                             $sqlSetorD = "SELECT d.id_departamento, d.nome, p.municipio, p.cidade FROM etec_departamento d
-                                            INNER JOIN etec_polo p ON d.idpolo = p.idpolo";
+                                            INNER JOIN adm_mand_polo p ON d.idpolo = p.idpolo";
                             $resultDestino = $conn->query($sqlSetorD); 
                             while($row = mysqli_fetch_array($resultDestino)){
                                 echo '<option value="'.$row['id_departamento'].'">'.$row['municipio'].'/'.$row['cidade'].'-'.$row['nome'].'</option>';

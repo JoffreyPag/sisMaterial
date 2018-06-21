@@ -44,7 +44,7 @@
                     <label for="Estoque">Estoque:</label>
                     <select name="local">
                         <?php
-                            $sql = "SELECT d.id_departamento, d.nome, p.cidade FROM etec_departamento d INNER JOIN etec_polo p ON d.idpolo = p.idpolo WHERE isestoque = 1";
+                            $sql = "SELECT d.id_departamento, d.nome, p.cidade FROM etec_departamento d INNER JOIN adm_mand_polo p ON d.idpolo = p.idpolo WHERE isestoque = 1";
                             $result = $conn->query($sql);
                             while($row = mysqli_fetch_array($result)){
                                 echo ' <option value="'.$row['id_departamento'].'">'.$row['cidade'].' - '.$row['nome'].'</option>';

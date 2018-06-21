@@ -5,7 +5,7 @@
     $sql = "SELECT t.numero_tombo, t.numero_serie, t.id_material, m.especificacao, d.id_departamento, d.nome, p.idpolo, p.cidade FROM etec_tombo t 
     INNER JOIN etec_materiais_permanentes m ON t.id_material = m.id_permanente
     INNER JOIN etec_departamento d ON t.id_departamento = d.id_departamento
-    INNER JOIN etec_polo p ON d.idpolo = p.idpolo
+    INNER JOIN adm_mand_polo p ON d.idpolo = p.idpolo
     WHERE t.numero_tombo = $idTombo";
 
     $result = $conn->query($sql);
@@ -61,7 +61,7 @@
                     <select name="local">
                         <option value="<?=$row['idpolo'] ?>"><?=$row['cidade'] ?></option>
                         <?php
-                            $sql2 = "SELECT idpolo, cidade FROM etec_polo";
+                            $sql2 = "SELECT idpolo, cidade FROM adm_mand_polo";
                             $result2 = $conn->query($sql2);
                             while($row2 = mysqli_fetch_array($result2)){
                                 echo ' <option value="'.$row2['idpolo'].'">'.$row2['cidade'].'</option>';

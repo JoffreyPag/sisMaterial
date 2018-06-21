@@ -4,7 +4,7 @@ include_once("../conexao.php");
     $sql = "SELECT t.numero_tombo, t.id_material, m.especificacao, m.acessorio, t.id_departamento ,d.nome, p.municipio, p.cidade FROM etec_tombo t
             INNER JOIN etec_materiais_permanentes m ON t.id_material = m.id_permanente
             INNER JOIN etec_departamento d ON t.id_departamento = d.id_departamento
-            INNER JOIN etec_polo p ON d.idpolo = p.idpolo
+            INNER JOIN adm_mand_polo p ON d.idpolo = p.idpolo
             WHERE t.numero_tombo = $nt";
     $resultado = $conn->query($sql);
     $row = mysqli_fetch_array($resultado)
@@ -31,7 +31,7 @@ include_once("../conexao.php");
                 <td>
                     <?php
                         $sqlSetor = "SELECT d.id_departamento, d.nome, p.municipio, p.cidade FROM etec_departamento d
-                                    INNER JOIN etec_polo p ON d.idpolo = p.idpolo";
+                                    INNER JOIN adm_mand_polo p ON d.idpolo = p.idpolo";
                         $resultDestino = $conn->query($sqlSetor);
                         echo '<select name="setorDestino">';
                         while($row2 = mysqli_fetch_array($resultDestino)){

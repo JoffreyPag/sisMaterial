@@ -2,7 +2,7 @@
 include_once("../conexao.php");
 
 $sql = "SELECT d.nome, d.id_departamento, p.municipio, p.cidade FROM etec_departamento d 
-        INNER JOIN etec_polo p ON d.idpolo = p.idpolo
+        INNER JOIN adm_mand_polo p ON d.idpolo = p.idpolo
         WHERE isestoque = 1";
 $result = $conn->query($sql);
 ?>

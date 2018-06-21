@@ -7,24 +7,24 @@ include_once("conexao.php");
         $sqlpolo = "SELECT t.numero_tombo, t.numero_serie, t.id_material, m.especificacao, d.id_departamento, d.nome, p.cidade FROM etec_tombo t 
         INNER JOIN etec_materiais_permanentes m ON t.id_material = m.id_permanente
         INNER JOIN etec_departamento d ON t.id_departamento = d.id_departamento
-        INNER JOIN etec_polo p ON d.idpolo = p.idpolo
+        INNER JOIN adm_mand_polo p ON d.idpolo = p.idpolo
         WHERE d.id_departamento = $dpID";
         
     }else{
         $sqlpolo = "SELECT t.numero_tombo, t.numero_serie, t.id_material, m.especificacao, d.id_departamento, d.nome, p.cidade FROM etec_tombo t 
         INNER JOIN etec_materiais_permanentes m ON t.id_material = m.id_permanente
         INNER JOIN etec_departamento d ON t.id_departamento = d.id_departamento
-        INNER JOIN etec_polo p ON d.idpolo = p.idpolo
+        INNER JOIN adm_mand_polo p ON d.idpolo = p.idpolo
         WHERE p.idpolo = $poloID";
         
     }
     $resultadopolo = $conn->query($sqlpolo);
     
-    $infopolo = "SELECT municipio, cidade FROM etec_polo where idpolo = $poloID";
+    $infopolo = "SELECT municipio, cidade FROM adm_mand_polo where idpolo = $poloID";
     $res = $conn->query($infopolo);
     $polon = mysqli_fetch_array($res);
 
-    $sqlpolos = "SELECT idpolo, municipio, cidade FROM etec_polo"; 
+    $sqlpolos = "SELECT idpolo, municipio, cidade FROM adm_mand_polo"; 
     $resultadolista = $conn->query($sqlpolos);
 
     $sqlSetor = "SELECT id_departamento, nome FROM etec_departamento WHERE idpolo = $poloID";
