@@ -19,14 +19,14 @@ $result = $conn->query($sql);
         while($row = mysqli_fetch_array($result)){
             echo '<div>
                     <p>'.$row['municipio'].'/'.$row['cidade'].'-'.$row['nome'].'</p>
-                    <form action="" method="post">
-                        <button type="submit" value="IDAQUI" name="Ver">Ver</button>
+                    <form action="Listar.php" method="post">
+                        <button type="submit" value="'.$row['id_departamento'].'" name="Ver">Ver</button>
                     </form>
                     <form action="" method="post">
-                        <button type="submit" value="IDAQUI" name="Editar">Editar</button>
+                        <button type="submit" value="'.$row['id_departamento'].'" name="Editar">Editar</button>
                     </form>
                     <form action="" method="post">
-                        <button type="submit" value="IDAQUI" name="Excluir">Excluir</button>
+                        <button type="submit" value="'.$row['id_departamento'].'" name="Excluir">Excluir</button>
                     </form>
                 </div>';
         }

@@ -9,7 +9,7 @@ include_once("../conexao.php");
     <title>Novo Estoque</title>
 </head>
 <body>
-    <form action="" method="post">
+    <form action="../controle/processoEstoque.php" method="post">
         <div>
             <label for="nome">Nome:</label>
             <input type="text" name="nome" id="nome">
@@ -26,6 +26,10 @@ include_once("../conexao.php");
                     }
                 ?>
             </select>
+        </div>
+        <div>
+            <br>
+            <input type="submit" value="Criar" name="Criar">
         </div>
     </form>
 </body>
